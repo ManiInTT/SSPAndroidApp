@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingRight="24dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_text"
+                android:gravity="left"
+                android:text="@string/trans_details"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/button_text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="ID"
+                    android:textStyle="italic|bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/tv_trans_id"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_id"
+                    android:textSize="@dimen/button_text" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_date"
+                    android:textColor="@color/black"
+                    android:textStyle="italic|bold"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/tv_trans_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_id"
+                    android:textSize="@dimen/button_text" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_type"
+                    android:textColor="@color/black"
+                    android:textStyle="italic|bold"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/tv_trans_type"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_id"
+                    android:textSize="@dimen/button_text" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_amount"
+                    android:textColor="@color/black"
+                    android:textStyle="italic|bold"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/tv_trans_amount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginBottom="@dimen/button_text"
+                    android:text="@string/trans_id"
+                    android:textSize="@dimen/button_text" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/twenty_dp"
+                android:background="@drawable/round_corner_progress"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/twenty_dp">
+
+    <FrameLayout
+        android:id="@+id/fv_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:src="@drawable/loader" />
+
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="ssp.tt.com.ssp.activity.TicketType">
+
+    <include
+        android:id="@+id/toolbar_view"
+        layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="8dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Date of the transaction (dd/mm/yyyy)"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp">
+
+                    <EditText
+                        android:id="@+id/et_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edittext_white"
+                        android:maxLines="1"
+                        android:paddingLeft="15dp"
+                        android:singleLine="true" />
+
+                    <ssp.tt.com.ssp.widgets.IconTextView
+                        android:id="@+id/iv_search"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:background="#469394"
+                        android:gravity="center"
+                        android:text="@string/icon_down_arrow"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Mode of payment"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/tv_deposit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@drawable/radio_btn_selector"
+                        android:checked="true"
+                        android:text="Deposit"
+                        android:textSize="15sp" />
+
+                    <RadioButton
+                        android:id="@+id/tv_netbanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@null"
+                        android:button="@drawable/radio_btn_selector"
+                        android:text="Netbanking / Transfer"
+                        android:textSize="15sp" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Mode of deposit"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/tv_cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@drawable/radio_btn_selector"
+                        android:checked="true"
+                        android:text="Cash"
+                        android:textSize="15sp" />
+
+                    <RadioButton
+                        android:id="@+id/tv_cheque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@null"
+                        android:button="@drawable/radio_btn_selector"
+                        android:text="Cheque"
+                        android:textSize="15sp" />
+
+                    <RadioButton
+                        android:id="@+id/tv_draft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@null"
+                        android:button="@drawable/radio_btn_selector"
+                        android:text="Demand draft"
+                        android:textSize="15sp" />
+                </RadioGroup>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Amount"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <EditText
+                            android:id="@+id/et_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edittext_white"
+                            android:digits="0123456789."
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:paddingLeft="15dp"
+                            android:singleLine="true" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_cash"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Beneficiary account"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <EditText
+                                android:id="@+id/et_beneficiary_account"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/edittext_grey"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_cheque"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Beneficiary name"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <EditText
+                                android:id="@+id/et_beneficiary_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edittext_white"
+                                android:inputType="textCapSentences"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:id="@+id/tv_account_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Account number"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <EditText
+                                android:id="@+id/et_accout_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edittext_white"
+                                android:digits="1234567890"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true" />
+
+
+                            <TextView
+                                android:id="@+id/tv_cheque_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Cheque Number"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <EditText
+                                android:id="@+id/et_check_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edittext_white"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true" />
+
+
+                            <TextView
+                                android:id="@+id/tv_transaction_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Transaction reference number"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                android:visibility="gone" />
+
+                            <EditText
+                                android:id="@+id/et_transaction_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edittext_white"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tv_check_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Cheque Date"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <RelativeLayout
+                                android:id="@+id/rl_check_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp">
+
+                                <EditText
+                                    android:id="@+id/et_check_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/edittext_white"
+                                    android:maxLines="1"
+                                    android:paddingLeft="15dp"
+                                    android:singleLine="true" />
+
+                                <ssp.tt.com.ssp.widgets.IconTextView
+                                    android:id="@+id/iv_check_date"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentRight="true"
+                                    android:background="#469394"
+                                    android:gravity="center"
+                                    android:text="@string/icon_down_arrow"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="25sp" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Bank"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp">
+
+                                <EditText
+                                    android:id="@+id/et_bank"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/edittext_white"
+                                    android:clickable="true"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:maxLines="1"
+                                    android:paddingLeft="15dp"
+                                    android:singleLine="true" />
+
+                                <ssp.tt.com.ssp.widgets.IconTextView
+                                    android:id="@+id/iv_bank"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentRight="true"
+                                    android:background="#469394"
+                                    android:gravity="center"
+                                    android:text="@string/icon_down_arrow"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="25sp" />
+
+                                <Spinner
+                                    android:id="@+id/spinner_bank"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@drawable/edittext_white"
+                                    android:visibility="invisible" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="IFSC Code"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <EditText
+                                android:id="@+id/et_ifsc_code"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edittext_white"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:paddingLeft="15dp"
+                                android:singleLine="true"
+                                android:textAllCaps="true" />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_receipt_challan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Receipt /  bank challan"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/tv_path"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="17sp"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/et_receipt_challon"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/amount_color"
+                            android:text="Upload" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Payment Notes"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+
+                        <EditText
+                            android:id="@+id/et_payment_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/edittext_white"
+                            android:inputType="textCapSentences|textMultiLine"
+
+                            android:paddingLeft="15dp" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0"
+                android:background="@color/dark_grey"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <TextView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toStartOf="@+id/btn_update"
+                    android:layout_toLeftOf="@+id/btn_update"
+                    android:background="@color/buttonColor"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/btn_update"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:background="@color/buttonColor"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/submit"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Total"
+                    android:textColor="@color/textColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/btn_cancel"
+                    android:layout_toLeftOf="@+id/btn_cancel"
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_toRightOf="@+id/textView4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Rs"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_amount_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="00"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

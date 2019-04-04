@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#469394</color>
+    <color name="colorPrimaryDark">#469394</color>
+    <color name="colorAccent">#469394</color>
+    <color name="splashBackground">#469394</color>
+    <color name="appTextColor">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#F0F0F0</color>
+    <color name="dark_grey">#D7D7D7</color>
+    <color name="black">#000</color>
+    <color name="buttonColor">#469394</color>
+    <color name="textColor">#7C7C7C</color>
+    <color name="errorMessage">#E68364</color>
+    <color name="serial_grey">#C9C9C9</color>
+    <color name="amount_color">#469394</color>
+    <color name="color_info">#FF6503</color>
+    <color name="color_error">#B80E1B</color>
+
+
+
+    <color name="bg_amount">#EFF0F1</color>
+
+    <color name="ticket_name_clr">#2D2D2D</color>
+    <color name="ticket_serias_color">#303030</color>
+    <color name="light_color">#3da8a9</color>
+    <color name="blue_color">#42A0CB</color>
+
+</resources>

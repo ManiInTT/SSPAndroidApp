@@ -1,0 +1,192 @@
+<resources>
+    <string name="app_name">SSP</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Login xml -->
+    <string name="title_activity_login_password">Login</string>
+    <string name="title_activity_login">Login</string>
+    <string name="forgot_user_name"><u>Forgot user name !</u></string>
+    <string name="register"><u>Register as new user</u></string>
+    <string name="user_id">Email address / Mobile number</string>
+    <string name="login_password">Password</string>
+    <string name="next">Next</string>
+    <string name="login">Login</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="check_out">Check out</string>
+    <string name="next_day_tickets">Next day</string>
+    <string name="confirm">Confirm</string>
+    <string name="pay">Pay</string>
+
+    <!-- Register -->
+    <string name="title_activity_register">Register</string>
+    <string name="email_user">Email address</string>
+    <string name="mobile_user">Mobile number</string>
+    <string name="signup">Sign up</string>
+    <string name="forgot_password"><u>Forgot password !</u></string>
+
+    <!-- Error Message -->
+    <string name="err_msg_mobile_number">Enter valid mobile number</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter valid password</string>
+    <string name="err_msg_valid_confirm_password">Enter valid confirm password</string>
+    <string name="err_msg_pin">Enter valid pin</string>
+    <string name="err_msg_email_mobile">Enter valid email address / mobile number</string>
+    <string name="err_msg_confirm_password">Confirm password does not matched</string>
+
+    <!-- Dashboard-->
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Reset Password -->
+    <string name="title_activity_rest_password">Create password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sms">SMS</string>
+    <string name="email">Email</string>
+    <string name="request_pin">Request PIN</string>
+    <string name="pin_number">Pin number</string>
+    <string name="pin_request">Key in 6 digit pin you registered mobile/email</string>
+    <string name="title_activity_pin_request">Reset Password Request</string>
+    <string name="title_activity_pin_confirmation">Pin Confirmation</string>
+    <string name="retrieve_user_name">Retrieve your user name to ?</string>254522
+    <string name="reset_password">Reset password with verification of</string>
+
+    <!-- Profile-->
+    <string name="title_activity_profile">Profile</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="contact_number">Contact number</string>
+    <string name="door_no">Door number</string>
+    <string name="street">Street/Apartment</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="pin_code">PIN code</string>
+    <string name="dob">Date of birth</string>
+
+    <!-- General-->
+    <string name="send">Send</string>
+    // loading text
+    <string name="loading_message">Loading.... </string>
+    // network connection error text
+    <string name="network_connection_error">No internet connection!</string>
+    // permissions not granted text
+    <string name="permissions_not_granted">Permissions were not granted.</string>
+    <string name="title_activity_security_setting">Security Settings</string>
+    <string name="title_activity_ewallet">Ewallet</string>
+    <string name="title_activity_transaction_details">Transaction details</string>
+    <string name="title_activity_transaction_history">Transaction history</string>
+
+    <!-- security-->
+    <string name="security_text">Set your secret question and answer for security purpose?</string>
+    <string name="sec_answer">Secret answer</string>
+    <string-array name="security_questions">
+        <item>What is your pet name ?</item>
+        <item>What was your childhood nickname?</item>
+        <item>What is the name of your favorite childhood friend?</item>
+        <item>What is your favorite movie?</item>
+        <item>What was your favorite sport in high school?</item>
+    </string-array>
+    <string name="err_msg_sec_answer">Enter your secret answer</string>
+
+
+    <string name="warning">Warning</string>
+    <string name="success">Success</string>
+
+    <string name="err_msg_first_name">Enter first name</string>
+    <string name="err_msg_last_name">Enter last name</string>
+    <string name="err_msg_contact_number">Enter contact number</string>
+    <string name="err_msg_door_no">Enter door number</string>
+    <string name="err_msg_street"> Enter street/apartment</string>
+    <string name="err_msg_city">Enter city</string>
+    <string name="err_msg_state">Enter state</string>
+    <string name="err_msg_country">Enter country</string>
+    <string name="err_msg_pin_code">Enter PIN code</string>
+    <string name="err_msg_dob">Enter date of birth</string>
+    <string name="you_have">You have</string>
+    <string name="trans_details">Transaction details</string>
+    <string name="trans_id">ID</string>
+    <string name="trans_date">Date</string>
+    <string name="trans_amount">Amount</string>
+    <string name="trans_type">Type</string>
+    <string name="title_activity_ticket_type">TicketType</string>
+    <string name="title_select_ticket_type">Select Ticket Type</string>
+    <string name="title_activity_ticket_series">Select the series</string>
+    <string name="title_activity_result">Result</string>
+    <string name="title_activity_my_result">My result</string>
+    <string name="title_activity_my_result_history">My result history</string>
+    <string name="title_activity_result_of_the_day">Result for the Day</string>
+    <string name="title_activity_deposit">Deposit</string>
+    <string name="title_activity_my_black_result">My Block Result</string>
+    <string name="title_activity_my_black_result_history">My Block Result History</string>
+    <string name="title_activity_black_result_history">Block Result History</string>
+    <string name="title_activity_earning_breakdown">Earning breakdown</string>
+    <string name="title_earning_result">Earning Summary</string>
+    <string name="title_e_wallet">My eWalllet</string>
+    <string name="title_my_cart">My Cart</string>
+    <string name="choose_ticket_type">Choose ticket type</string>
+    <string name="choose_ticket_series">Choose the Ticket Series</string>
+    <string name="choose_ticket_serial_no">Choose the Ticket Serial numbers</string>
+    <string name="choose_serial_no">Choose the Serial numbers</string>
+    <string name="ticket_type_choose_info">Buy minimum one unit(7 tickets)</string>
+    <string name="purchase_summary">Purchase Summary</string>
+    <string name="rs">\u20B9</string>
+    <string name="rs_basic">\u20B9 0000000.00</string>
+    <string name="title_with_draw">Withdrawal Request</string>
+    <string name="number_of_units">Number of units</string>
+    <string name="netamount">Net amount</string>
+    <string name="available_amount">Available amount</string>
+    <string name="balance_after_purchase">Balance after purchase</string>
+    <string name="update_imei">You registered device is different from login device, Update device and continue ?</string>
+
+
+    <string name="please_enter_amount">Please enter the amount</string>
+    <string name="please_enter_valid_amount">Please enter the valid amount</string>
+    <string name="please_enter_beneficiary_account">Please enter beneficiary account name</string>
+    <string name="please_enter_beneficiary">Please enter beneficiary name</string>
+    <string name="please_enter_account_name">Please enter account name</string>
+    <string name="please_enter_your_account_name">Please enter your account name</string>
+    <string name="please_choose_challan_receipt">Please choose Receipt/Bank receipt</string>
+    <string name="please_enter_payment_notes">Please enter payment notes</string>
+
+    <string name="please_enter_your_account_number">Please enter your account number</string>
+    <string name="please_enter_account_number">Please enter account number</string>
+    <string name="please_enter_cheque_number">Please enter cheque number</string>
+    <string name="please_enter_demand_draft_number">Please enter demand draft number</string>
+    <string name="please_select_cheque_date">Please select cheque date</string>
+    <string name="please_select_demand_draft_date">Please select demand draft date</string>
+    <string name="please_enter_ifsc_code">Please enter IFSC Code</string>
+    <string name="please_enter_trnsfer_number">Please enter transaction reference number</string>
+    <string name="Rs">\u20B9</string>
+    <string name="cancel_purchase_title">Cancel this purchase ?</string>
+    <string name="cancel_purchase_message">You may miss the tickets you selected.</string>
+    <string name="please_terms">Please accept the terms</string>
+
+
+    <string name="title_update_account">Account Details</string>
+    <string name="bank_id">Bank Id</string>
+    <string name="bank_name">Branch Name</string>
+    <string name="account_number">Account Number</string>
+    <string name="account_name">Account Name</string>
+    <string name="account_ifsc_code">IFSC Code</string>
+    <string name="please_enter_bank_id">Please enter bank id</string>
+    <string name="please_enter_bank_name">Please enter bank name</string>
+    <string name="please_enter_branch_name">Please enter branch name</string>
+
+    <string name="please_enter_all_fields">Please enter all fields</string>
+
+
+    <string name="title_support">Support Request</string>
+    <string name="please_enter_subject">Please enter subject</string>
+    <string name="please_enter_message">Please enter message</string>
+    <string name="title_view_support">Support List</string>
+    <string name="title_view_track">Support Details</string>
+</resources>
