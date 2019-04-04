@@ -218,7 +218,6 @@ public class TicketType extends BaseActivity {
             textView.setTextColor(Color.RED);
             snackbar.show();
         }
-
     }
 
 

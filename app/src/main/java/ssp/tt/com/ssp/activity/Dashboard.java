@@ -336,7 +336,7 @@ public class Dashboard extends BaseActivity
         final MenuItem menuItem = menu.findItem(R.id.action_cart);
 
         View actionView = MenuItemCompat.getActionView(menuItem);
-        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+        textCartItemCount = actionView.findViewById(R.id.cart_badge);
         //setupBadge();
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override

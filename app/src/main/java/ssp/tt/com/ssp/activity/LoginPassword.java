@@ -227,7 +227,7 @@ public class LoginPassword extends BaseActivity implements View.OnClickListener 
 
                 if (firstname == null || firstname.equals("null")) {
                     Intent intent = new Intent(this, Profile.class);
-                    intent.putExtra("pageRequestFlag", "LOGIN");
+                    intent.putExtra("pageReqtv_ticket_type_iconuestFlag", "LOGIN");
                     startActivityForResult(intent, 1);
                     finish();
                     closeAllActivities();
@@ -237,7 +237,7 @@ public class LoginPassword extends BaseActivity implements View.OnClickListener 
                     String title = jsonObjectDesc.getString(userLoginPasswordRequest.title);
                     String description = jsonObjectDesc.getString(userLoginPasswordRequest.description);
                     if (pageRequestFlag.equals(userLoginPasswordRequest.LOGIN) || pageRequestFlag.equals(userLoginPasswordRequest.FORGET_PASSWORD) || pageRequestFlag.equals(userLoginPasswordRequest.CHANGE_PASSWORD)) {
-                        final Dialog dialog = new Dialog(this);
+               /*         final Dialog dialog = new Dialog(this);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setContentView(R.layout.alert_dialog_warning);
                         TextView tvTitle = dialog.findViewById(R.id.tv_title);
@@ -246,16 +246,16 @@ public class LoginPassword extends BaseActivity implements View.OnClickListener 
                         tvTitle.setText(title);
                         TextView noBtn = dialog.findViewById(R.id.no_btn);
                         noBtn.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
+                            public void onClick(View v) {*/
                                 dialog.dismiss();
                                 Intent intent = new Intent(LoginPassword.this, Dashboard.class);
                                 startActivity(intent);
                                 finish();
                                 closeAllActivities();
 
-                            }
+                        /*    }
                         });
-                        dialog.show();
+                        dialog.show();*/
 
 
                     } else {
