@@ -12,7 +12,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/white"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +30,8 @@
                 android:gravity="left"
                 android:text="@string/trans_details"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/button_text" />
+                android:textSize="@dimen/button_text"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -42,9 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/button_text"
                     android:text="ID"
-                    android:textStyle="italic|bold"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/button_text" />
+                    android:textSize="@dimen/button_text"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/tv_trans_id"
@@ -69,8 +70,8 @@
                     android:layout_marginBottom="@dimen/button_text"
                     android:text="@string/trans_date"
                     android:textColor="@color/black"
-                    android:textStyle="italic|bold"
-                    android:textSize="@dimen/button_text" />
+                    android:textSize="@dimen/button_text"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/tv_trans_date"
@@ -95,8 +96,8 @@
                     android:layout_marginBottom="@dimen/button_text"
                     android:text="@string/trans_type"
                     android:textColor="@color/black"
-                    android:textStyle="italic|bold"
-                    android:textSize="@dimen/button_text" />
+                    android:textSize="@dimen/button_text"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/tv_trans_type"
@@ -121,8 +122,8 @@
                     android:layout_marginBottom="@dimen/button_text"
                     android:text="@string/trans_amount"
                     android:textColor="@color/black"
-                    android:textStyle="italic|bold"
-                    android:textSize="@dimen/button_text" />
+                    android:textSize="@dimen/button_text"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/tv_trans_amount"

@@ -447,7 +447,7 @@ public class Ewallet extends BaseActivity {
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
                     String title = jsonObjectDesc.getString(userLoginRequest.title);
                     String description = jsonObjectDesc.getString(userLoginRequest.description);
-                    Util.warningAlertDialog(this, title, description, 0);
+                    Util.successAlertDialog(this, title, description, 0);
                 } else {
                     WebServiceUtil userLoginRequest = new WebServiceUtil();
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
@@ -471,7 +471,7 @@ public class Ewallet extends BaseActivity {
                     Util.warningAlertDialog(this, title, description, 0);
                     final Dialog dialog = new Dialog(this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.alert_dialog_warning);
+                    dialog.setContentView(R.layout.alert_dialog_success);
                     dialog.setCancelable(false);
                     TextView tvTitle = dialog.findViewById(R.id.tv_title);
                     TextView tvMessage = dialog.findViewById(R.id.tv_message);

@@ -317,11 +317,11 @@ public class UpdateAccount extends BaseActivity {
                 String title = jsonObjectDesc.getString(userLoginRequest.title);
                 String description = jsonObjectDesc.getString(userLoginRequest.description);
                 if (fromTitle.equals("PROFILE")) {
-                    Util.warningAlertDialog(this, title, description, 1);
+                    Util.successAlertDialog(this, title, description, 1);
                 } else {
                     final Dialog dialog = new Dialog(this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.alert_dialog_warning);
+                    dialog.setContentView(R.layout.alert_dialog_success);
                     dialog.setCancelable(false);
                     TextView tvTitle = dialog.findViewById(R.id.tv_title);
                     TextView tvMessage = dialog.findViewById(R.id.tv_message);
@@ -338,8 +338,6 @@ public class UpdateAccount extends BaseActivity {
                         }
                     });
                     dialog.show();
-
-
                 }
             } else {
                 WebServiceUtil userLoginRequest = new WebServiceUtil();

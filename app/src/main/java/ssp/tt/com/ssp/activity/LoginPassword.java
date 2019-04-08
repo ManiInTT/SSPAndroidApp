@@ -227,7 +227,7 @@ public class LoginPassword extends BaseActivity implements View.OnClickListener 
 
                 if (firstname == null || firstname.equals("null")) {
                     Intent intent = new Intent(this, Profile.class);
-                    intent.putExtra("pageReqtv_ticket_type_iconuestFlag", "LOGIN");
+                    intent.putExtra("pageRequestFlag", "LOGIN");
                     startActivityForResult(intent, 1);
                     finish();
                     closeAllActivities();

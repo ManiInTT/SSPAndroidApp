@@ -8,8 +8,8 @@
     <string name="icon_withdrawal">&#xf09d;</string>
     <string name="icon_blocks">&#xf007;</string>
     <string name="icon_support">&#xf059;</string>
-    <string name="icon_warning">&#xf059;</string>
-    <string name="icon_success">&#xf05a;</string>
+    <string name="icon_warning">&#xf05a;</string>
+    <string name="icon_success">&#xf058;</string>
     <string name="icon_down_arrow">&#xf107;</string>
     <string name="icon_cart">&#xf07a;</string>
     <string name="icon_arrow">&#xf054;</string>

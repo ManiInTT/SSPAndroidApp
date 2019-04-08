@@ -392,7 +392,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
         isInternetPresent = mConnectionDetector.isNetworkAvailable();
         if (isInternetPresent) {
             if (flag.equals("1")) {
-                if (pageRequestFlag.equals("UPDATE")) {
+                if (pageRequestFlag != null && pageRequestFlag.equals("UPDATE")) {
                     new viewProfile().execute();
                 }
             } else {
@@ -564,7 +564,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                     String description = jsonObjectDesc.getString(webServiceUtil.description);
                     final Dialog dialog = new Dialog(this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.alert_dialog_warning);
+                    dialog.setContentView(R.layout.alert_dialog_success);
                     dialog.setCancelable(false);
                     TextView tvTitle = dialog.findViewById(R.id.tv_title);
                     TextView tvMessage = dialog.findViewById(R.id.tv_message);
@@ -581,11 +581,10 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                                 startActivity(new Intent(Profile.this, SecuritySetting.class));
                                 finish();
                             }
-
                         }
                     });
                     dialog.show();
-                    Util.warningAlertDialog(this, title, description, 1);
+                    //Util.warningAlertDialog(this, title, description, 1);
                 } else {
                     WebServiceUtil webServiceUtil = new WebServiceUtil();
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);
@@ -651,7 +650,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
             } else if (addressFlag == 5) {
                 dialog.dismiss();
                 if (mCode == userProfileRequest.codeSuccess) {
-                    Util.warningAlertDialog(this, getResources().getString(R.string.success), "Your account has been deleted successfully. ", 0);
+                    Util.successAlertDialog(this, getResources().getString(R.string.success), "Your account has been deleted successfully. ", 0);
                 } else {
                     WebServiceUtil webServiceUtil = new WebServiceUtil();
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);

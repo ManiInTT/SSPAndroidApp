@@ -171,7 +171,7 @@ public class PINConfirmation extends BaseActivity implements View.OnClickListene
                 String description = jsonObjectDesc.getString(webServiceUtil.description);
                 final Dialog dialog = new Dialog(this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.alert_dialog_warning);
+                dialog.setContentView(R.layout.alert_dialog_success);
                 TextView tvTitle = dialog.findViewById(R.id.tv_title);
                 TextView tvMessage = dialog.findViewById(R.id.tv_message);
                 tvMessage.setText(description);

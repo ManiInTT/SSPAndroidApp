@@ -3,8 +3,8 @@ package ssp.tt.com.ssp.webservice;
 public class WebServiceUtil {
 
     //test url
-    //public static String baseUrl = "http://www.mmg.tainn-tech.com/ssprest/";
-    public static String baseUrl = "http://sspapibeta.tainn-tech.com/";
+    public static String baseUrl = "http://www.mmg.tainn-tech.com/ssprest/";
+    //public static String baseUrl = "http://sspapibeta.tainn-tech.com/";
 
 
     //common value

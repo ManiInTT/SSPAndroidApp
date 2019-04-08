@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
+
     <include layout="@layout/toolbar_layout" />
 
     <ScrollView
@@ -12,23 +13,24 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical|clip_horizontal"
         android:background="@color/white"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
             android:orientation="vertical"
-            android:paddingRight="24dp"
-            android:paddingTop="56dp">
+            android:paddingLeft="24dp"
+            android:paddingTop="56dp"
+            android:paddingRight="24dp">
 
             <TextView
                 android:id="@+id/tv_security_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:layout_marginTop="20dp"
                 android:text="@string/security_text"
                 android:textSize="@dimen/button_text" />
 
@@ -36,15 +38,15 @@
                 android:id="@+id/sp_secret_question"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/tl_ans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:id="@+id/tl_ans"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_answer"
@@ -52,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/sec_answer"
                     android:inputType="text">
+
                     <requestFocus />
                 </EditText>
             </android.support.design.widget.TextInputLayout>
@@ -59,6 +62,7 @@
 
         </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -217,12 +217,12 @@ public class Register extends BaseActivity implements View.OnClickListener, Serv
                 PreferenceConnector.writeString(getApplicationContext(), PreferenceConnector.USER_MOBILE, userMobile);
                 final Dialog dialog = new Dialog(this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.alert_dialog_warning);
+                dialog.setContentView(R.layout.alert_dialog_success);
                 dialog.setCancelable(false);
                 TextView tvTitle = dialog.findViewById(R.id.tv_title);
                 TextView tvMessage = dialog.findViewById(R.id.tv_message);
                 tvMessage.setText("Please verify your mobile number with PIN number");
-                tvTitle.setText("Warning");
+                tvTitle.setText("Success");
                 TextView noBtn = dialog.findViewById(R.id.no_btn);
                 noBtn.setText("Verify Now");
                 noBtn.setOnClickListener(new View.OnClickListener() {

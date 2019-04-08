@@ -200,7 +200,7 @@ public class WithDraw extends BaseActivity {
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
                     String title = jsonObjectDesc.getString(userLoginRequest.title);
                     String description = jsonObjectDesc.getString(userLoginRequest.description);
-                    Util.warningAlertDialog(this, title, description, 1);
+                    Util.successAlertDialog(this, title, description, 1);
                 } else {
                     WebServiceUtil userLoginRequest = new WebServiceUtil();
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);

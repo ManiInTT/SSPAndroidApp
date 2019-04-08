@@ -443,6 +443,33 @@ public class Util {
         });
         dialog.show();
     }
+    public static void successAlertDialog(final Activity context, String title, String message, final int code) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.alert_dialog_success);
+        dialog.setCancelable(false);
+        TextView tvTitle = dialog.findViewById(R.id.tv_title);
+        TextView tvMessage = dialog.findViewById(R.id.tv_message);
+        tvMessage.setText(message);
+        tvTitle.setText(title);
+        TextView noBtn = dialog.findViewById(R.id.no_btn);
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (code == 1) {
+                    context.finish();
+                } else if (code == 2) {
+                    Intent i = new Intent(context, Login.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_NEW_TASK |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(i);
+                }
+
+            }
+        });
+        dialog.show();
+    }
 
 
 }

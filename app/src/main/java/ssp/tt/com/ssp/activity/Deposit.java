@@ -756,7 +756,7 @@ public class Deposit extends BaseActivity {
                     }
                     String transDate = etDate.getText().toString();
                     String transBaId = "2";
-                    String transAmount = etBeneficiaryName.getText().toString();
+                    String transAmount = etAmount.getText().toString();
                     String transBeneficiary = etBeneficiaryName.getText().toString();
                     String yourAccountNumber = etAccoutNumber.getText().toString();
                     String yourAccountName = etCheckNumber.getText().toString();
@@ -906,7 +906,7 @@ public class Deposit extends BaseActivity {
                 JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
                 String title = jsonObjectDesc.getString(userLoginRequest.title);
                 String description = jsonObjectDesc.getString(userLoginRequest.description);
-                Util.warningAlertDialog(this, title, description, 1);
+                Util.successAlertDialog(this, title, description, 1);
             } else {
                 WebServiceUtil userLoginRequest = new WebServiceUtil();
                 JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);

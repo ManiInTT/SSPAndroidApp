@@ -12,19 +12,20 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:layout_above="@+id/iv_bottom"
-        android:fitsSystemWindows="true">
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
-            android:paddingBottom="56dp"
             android:paddingLeft="24dp"
+            android:paddingTop="56dp"
             android:paddingRight="24dp"
-            android:paddingTop="56dp">
+            android:paddingBottom="56dp">
 
             <ssp.tt.com.ssp.widgets.IconTextView
                 android:layout_width="wrap_content"
@@ -39,8 +40,8 @@
                 android:id="@+id/tl_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_first_name"
@@ -57,8 +58,8 @@
                 android:id="@+id/tl_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_last_name"
@@ -104,8 +105,8 @@
                 android:id="@+id/tl_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_dob"
@@ -125,8 +126,8 @@
                 android:id="@+id/tl_contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_contact_number"
@@ -144,8 +145,8 @@
                 android:id="@+id/tl_contact_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_contact_email"
@@ -162,8 +163,8 @@
                 android:id="@+id/tl_door_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_door_no"
@@ -180,8 +181,8 @@
                 android:id="@+id/tl_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_street"
@@ -198,8 +199,8 @@
                 android:id="@+id/tl_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_country"
@@ -207,40 +208,40 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:editable="false"
-                    android:focusable="false"
                     android:ems="10"
+                    android:focusable="false"
                     android:hint="Country"
                     android:singleLine="true"
                     android:textColor="#000000" />
             </android.support.design.widget.TextInputLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tl_state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/et_state"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tl_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:editable="false"
-                android:focusable="false"
-                android:ems="10"
-                android:hint="State"
-                android:singleLine="true"
-                android:textColor="#000000" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/et_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="State"
+                    android:singleLine="true"
+                    android:textColor="#000000" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tl_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_city"
@@ -248,10 +249,10 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:editable="false"
-                    android:focusable="false"
                     android:ems="10"
-                    android:singleLine="true"
+                    android:focusable="false"
                     android:hint="City"
+                    android:singleLine="true"
                     android:textColor="#000000" />
             </android.support.design.widget.TextInputLayout>
 
@@ -260,8 +261,8 @@
                 android:id="@+id/tl_pin_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <EditText
                     android:id="@+id/et_pin_code"
@@ -287,13 +288,13 @@
                     android:layout_height="40dp"
                     android:background="@drawable/edittext_white"
                     android:clickable="true"
-                    android:maxLines="1"
                     android:gravity="center|start"
-                    android:textSize="17sp"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:singleLine="true"
                     android:text="Account Details"
                     android:textColor="@color/ticket_name_clr"
-                    android:paddingLeft="15dp"
-                    android:singleLine="true" />
+                    android:textSize="17sp" />
 
                 <ssp.tt.com.ssp.widgets.IconTextView
                     android:id="@+id/iv_bank"
@@ -306,7 +307,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="17sp" />
 
-     </RelativeLayout>
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -323,8 +324,8 @@
             android:id="@+id/btn_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginRight="2dp"
+            android:layout_weight="1"
             android:background="@color/buttonColor"
             android:padding="12dp"
             android:text="@string/update"
@@ -334,8 +335,8 @@
             android:id="@+id/btn_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="2dp"
+            android:layout_weight="1"
             android:background="@color/buttonColor"
             android:padding="12dp"
             android:text="@string/delete"
