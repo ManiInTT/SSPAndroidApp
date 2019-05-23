@@ -421,19 +421,21 @@ public class TransactionHistory extends BaseActivity {
             for (int qIndex = 0; qIndex < questionArray.length(); qIndex++) {
                 String transStatus = new JSONObject(questionArray.get(qIndex).toString()).getString("trans_status");
                 if (transStatus.equals(approved)) {
+                    int tableIndex = qIndex + 1;
                     final TableRow tr = new TableRow(this);
-                    tr.setId(qIndex);
+                    tr.setId(tableIndex);
                     tr.setLayoutParams(getLayoutParams());
-                    spinnerMap.put(qIndex, new JSONObject(questionArray.get(qIndex).toString()).toString());
-                    tr.addView(getTextView(qIndex + 1, Util.convertLocalDateTime(new JSONObject(questionArray.get(qIndex).toString()).getString("trans_date")), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
-                    tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("trans_type"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
-                    tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("trans_amount"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                    spinnerMap.put(tableIndex, new JSONObject(questionArray.get(qIndex).toString()).toString());
+                    tr.addView(getTextView(tableIndex, Util.convertLocalDateTime(new JSONObject(questionArray.get(qIndex).toString()).getString("trans_date")), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                    tr.addView(getTextView(tableIndex, new JSONObject(questionArray.get(qIndex).toString()).getString("trans_type"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                    tr.addView(getTextView(tableIndex, new JSONObject(questionArray.get(qIndex).toString()).getString("trans_amount"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
                     tr.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
                             String transactionDetails = spinnerMap.get(tr.getId());
                             Intent intent = new Intent(TransactionHistory.this, TransactionDetails.class);
-
+                            intent.putExtra("transactionDetails", transactionDetails);
+                            startActivity(intent);
                         }
                     });
                     tl.addView(tr, getTblLayoutParams());

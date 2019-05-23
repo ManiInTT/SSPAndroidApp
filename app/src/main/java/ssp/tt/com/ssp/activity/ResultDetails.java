@@ -201,6 +201,7 @@ public class ResultDetails extends BaseActivity {
                 int firstPrice = 0;
                 int secondPrice = 0;
                 int thirdPrice = 0;
+
                 JSONArray lotteryPrize = jsonObject.getJSONArray("lottery_prize");
                 tvFirstPriceTicket.setText("");
                 tvSecondPriceTicket.setText("");
