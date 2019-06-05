@@ -1279,6 +1279,49 @@ public class ServiceConnector {
         }
     }
 
+    public void getWithdrawRequestHistory(Context context, String user_id, String user_imei_number) {
+        try {
+            RequestApi request = getRetrofit(context).create(RequestApi.class);
+            Call<ResponseBody> call = request.getWithdrawRequestHistory(user_id, user_imei_number);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    if (!response.isSuccessful()) {
+                        ResponseBody jsonResponse = response.errorBody();
+                        BufferedReader reader = null;
+                        StringBuilder sb = new StringBuilder();
+                        if (jsonResponse != null) {
+                            reader = new BufferedReader(new InputStreamReader(jsonResponse.byteStream()));
+                        }
+                        String line;
+                        try {
+                            while ((line = reader.readLine()) != null) {
+                                sb.append(line);
+                            }
+                        } catch (IOException mJSONException) {
+                            Log.i("JSONException", mJSONException.getMessage());
+                        }
+                        serviceCallBack.callbackReturn(sb.toString());
+                        Log.i("Response Body", sb.toString());
+                    } else {
+
+                        onReadSuccess(response);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable response) {
+                    onReadFail(response);
+                }
+            });
+
+        } catch (NullPointerException errorMessage) {
+            onReadFail(errorMessage);
+        }
+    }
+
     public void getSecuritySettings(Context context) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
@@ -1402,6 +1445,16 @@ public class ServiceConnector {
         }
     }
 
+    public void viewMyPurchases(Context context, String userId, String imeiNumber) {
+        try {
+            RequestApi request = getRetrofit(context).create(RequestApi.class);
+            Call<ResponseBody> call = request.viewMyPurchases(userId, imeiNumber);
+            startAPI(call);
+        } catch (NullPointerException errorMessage) {
+            onReadFail(errorMessage);
+        }
+    }
+
     public void viewResult(Context context, String userId, String imeiNumber) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
@@ -1456,6 +1509,16 @@ public class ServiceConnector {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
             Call<ResponseBody> call = request.getCurrentBlocks(userId, imeiNumber);
+            startAPI(call);
+        } catch (NullPointerException errorMessage) {
+            onReadFail(errorMessage);
+        }
+    }
+
+    public void viewUserBlocks(Context context, String userId, String imeiNumber) {
+        try {
+            RequestApi request = getRetrofit(context).create(RequestApi.class);
+            Call<ResponseBody> call = request.getUserBlocks(userId, imeiNumber);
             startAPI(call);
         } catch (NullPointerException errorMessage) {
             onReadFail(errorMessage);

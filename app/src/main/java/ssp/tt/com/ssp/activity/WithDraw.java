@@ -5,10 +5,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -21,6 +24,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -67,9 +72,11 @@ public class WithDraw extends BaseActivity {
     ProgressDialog dialog;
     WebServiceUtil apiRequest;
 
-    public int API_TYPE = 1;
+    public int API_TYPE = 0;
     public final int API_WITH_DRAW = 1;
     public final int API_TERMS = 2;
+    String requestFlag = "1";
+    String requestSentFlag = "1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +87,8 @@ public class WithDraw extends BaseActivity {
         registerBaseActivityReceiver();
         setData();
         setTextWatcher();
+        new getWithdrawRequestHistory().execute();
+
         cbTerms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,8 +197,93 @@ public class WithDraw extends BaseActivity {
         unRegisterBaseActivityReceiver();
     }
 
+    /**
+     * This function add the headers to the table
+     **/
+    public void addHeaders() {
+        TableLayout tl = findViewById(R.id.main_table);
+        TableRow tr = new TableRow(this);
+        tr.setLayoutParams(getLayoutParams());
+        tr.addView(getTextView(0, "Date & time", Color.WHITE, Typeface.BOLD, ContextCompat.getColor(this, R.color.colorAccent)));
+        tr.addView(getTextView(0, "Status", Color.WHITE, Typeface.BOLD, ContextCompat.getColor(this, R.color.colorAccent)));
+        tr.addView(getTextView(0, "Amount", Color.WHITE, Typeface.BOLD, ContextCompat.getColor(this, R.color.colorAccent)));
+        tl.addView(tr, getTblLayoutParams());
+    }
+
+    private TextView getTextView(int id, String title, int color, int typeface, int bgColor) {
+        TextView tv = new TextView(this);
+        tv.setId(id);
+        tv.setText(title);
+        tv.setWidth(200);
+        tv.setTextColor(color);
+        tv.setPadding(10, 10, 10, 10);
+        tv.setTypeface(Typeface.DEFAULT, typeface);
+        tv.setBackgroundColor(bgColor);
+        tv.setLayoutParams(getLayoutParams());
+        return tv;
+    }
+
+    @NonNull
+    private TableLayout.LayoutParams getTblLayoutParams() {
+        return new TableLayout.LayoutParams(
+                200,
+                TableRow.LayoutParams.WRAP_CONTENT);
+    }
+
+
+    @NonNull
+    private TableRow.LayoutParams getLayoutParams() {
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                200,
+                TableRow.LayoutParams.WRAP_CONTENT);
+        params.setMargins(2, 2, 2, 2);
+        return params;
+    }
+
+
     @Override
     public void callbackReturn(String response) {
+
+        if (requestSentFlag.equals("1")) {
+
+
+        try {
+
+            if (requestFlag.equals("1")) {
+                System.out.println("Transaction  Details" + response);
+                JSONObject mJSONObject = new JSONObject(response);
+                int mCode = mJSONObject.getInt(apiRequest.statusCode);
+                if (mCode == apiRequest.codeSuccess) {
+                    addHeaders();
+                    String data = mJSONObject.getString(apiRequest.data);
+                    //JSONObject jsonData = new JSONObject(data);
+                    JSONArray questionArray = new JSONArray(data);
+                    TableLayout tl = findViewById(R.id.main_table);
+                    for (int qIndex = 0; qIndex < 10; qIndex++) {
+                        System.out.println("Width draw  Details" + questionArray.get(qIndex));
+
+                        TableRow tr = new TableRow(this);
+                        tr.setLayoutParams(getLayoutParams());
+                        tr.addView(getTextView(qIndex + 1, Util.convertLocalDateTime(new JSONObject(questionArray.get(qIndex).toString()).getString("wr_date")), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                        tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_status"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                        tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_amt"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                        tl.addView(tr, getTblLayoutParams());
+                    }
+                }
+//                else {
+//                    WebServiceUtil userLoginRequest = new WebServiceUtil();
+//                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
+//                    String title = jsonObjectDesc.getString(userLoginRequest.title);
+//                    String description = jsonObjectDesc.getString(userLoginRequest.description);
+//                    Util.warningAlertDialog(this, title, description, 0);
+//                }
+            }
+        }
+        catch (JSONException mException) {
+            Log.i("JSONException ffff", mException.getMessage());
+        }
+
+        }
         if (API_TYPE == API_WITH_DRAW) {
             try {
                 dialog.dismiss();
@@ -261,6 +355,33 @@ public class WithDraw extends BaseActivity {
             }
         }
 
+
+
+
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class getWithdrawRequestHistory extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //dialog = ProgressUtil.showDialog(Ewallet.this, getString(R.string.loading_message));
+        }
+
+        protected Void doInBackground(String... params) {
+            requestSentFlag = "1";
+            requestFlag = "1";
+            try {
+                String UserId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
+                String imeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
+                serviceConnector.getWithdrawRequestHistory(getApplicationContext(), UserId, imeiNumber);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
 
@@ -272,6 +393,8 @@ public class WithDraw extends BaseActivity {
             super.onPreExecute();
             dialog = ProgressUtil.showDialog(WithDraw.this, getString(R.string.loading_message));
             API_TYPE = API_WITH_DRAW;
+            requestSentFlag = "2";
+            requestFlag = "2";
         }
 
         protected Void doInBackground(String... params) {
@@ -294,6 +417,8 @@ public class WithDraw extends BaseActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             API_TYPE = API_TERMS;
+            requestSentFlag = "3";
+            requestFlag = "3";
             dialog = ProgressUtil.showDialog(WithDraw.this, getString(R.string.loading_message));
         }
 

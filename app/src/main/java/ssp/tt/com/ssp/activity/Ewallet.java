@@ -406,6 +406,13 @@ public class Ewallet extends BaseActivity {
 
                     }
                 } else {
+                    yourAccountBalance = "0.00";
+                    String mystring = getResources().getString(R.string.rs);
+                    double totalAmount = Double.valueOf(yourAccountBalance);
+                    tv_amount.setText(mystring + NumberFormat.getNumberInstance(Locale.ENGLISH).format(totalAmount));
+                    et_gain.setText("0.00");
+                    et_deposit.setText("0.00");
+
                     WebServiceUtil userLoginRequest = new WebServiceUtil();
                     JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
                     String title = jsonObjectDesc.getString(userLoginRequest.title);

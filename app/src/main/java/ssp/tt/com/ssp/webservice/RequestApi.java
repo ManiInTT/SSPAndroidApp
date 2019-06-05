@@ -106,6 +106,10 @@ public interface RequestApi {
     Call<ResponseBody> getTransactionList(@Field("user_id") String user_id,
                                           @Field("user_imei_number") String user_imei_number,
                                           @Field("page_no") String page_no);
+    @FormUrlEncoded
+    @POST("customertrans/withdrawrequesthistory")
+    Call<ResponseBody> getWithdrawRequestHistory(@Field("user_id") String user_id,
+                                          @Field("user_imei_number") String user_imei_number);
 
     @FormUrlEncoded
     @POST("customertrans/viewusertransdet")
@@ -171,6 +175,12 @@ public interface RequestApi {
     Call<ResponseBody> viewBlockResult(@Field("user_id") String user_id,
                                        @Field("user_imei_number") String user_imei_number);
 
+    @FormUrlEncoded
+    @POST("purchase/viewuserpurchase")
+    Call<ResponseBody> viewMyPurchases(@Field("user_id") String user_id,
+                                       @Field("user_imei_number") String user_imei_number);
+
+
     @GET("customers/getcountry")
     Call<ResponseBody> getCountry(@Query("country_id") String country_id);
 
@@ -211,6 +221,11 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST("blocks/getcurblock")
     Call<ResponseBody> getCurrentBlocks(@Field("user_id") String user_id,
+                                        @Field("user_imei_number") String user_imei_number);
+
+    @FormUrlEncoded
+    @POST("blocks/getuserblocks")
+    Call<ResponseBody> getUserBlocks(@Field("user_id") String user_id,
                                         @Field("user_imei_number") String user_imei_number);
 
     @GET("customertrans/getbank")

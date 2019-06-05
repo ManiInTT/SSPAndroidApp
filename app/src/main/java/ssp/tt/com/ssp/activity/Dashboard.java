@@ -48,7 +48,7 @@ public class Dashboard extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     GridView androidGridView;
     String[] DashboardMenuTexts = {
-            "My eWallet", "Result", "Buy ticket", "Gift the ticket", "Withdrawal", "My blocks", "My Profile", "Support"
+            "My eWallet", "Result", "Buy ticket", "Gift the ticket", "Withdrawal", "My blocks", "My Purchases","My Profile", "Support"
     };
     int[] DashboardMenuIcons = {
             R.string.icon_wallet,
@@ -57,6 +57,7 @@ public class Dashboard extends BaseActivity
             R.string.icon_gift_ticket,
             R.string.icon_withdrawal,
             R.string.icon_blocks,
+            R.string.icon_withdrawal,
             R.string.icon_blocks, R.string.icon_support
     };
     TextView login_email;
@@ -150,11 +151,15 @@ public class Dashboard extends BaseActivity
                     startActivity(new Intent(Dashboard.this, TicketType.class));
                 } else if (pos == 4) {
                     new CheckRegisterWithBank().execute();
+                } else if (pos == 5) {
+                    startActivity(new Intent(Dashboard.this, MyBlock.class));
                 } else if (pos == 6) {
+                    startActivity(new Intent(Dashboard.this, MyPurchases.class));
+                } else if (pos == 7) {
                     Intent intent = new Intent(Dashboard.this, Profile.class);
                     intent.putExtra("pageRequestFlag", "UPDATE");
                     startActivity(intent);
-                } else if (pos == 7) {
+                } else if (pos == 8) {
                     Intent intent = new Intent(Dashboard.this, Support.class);
                     startActivity(intent);
                 }
@@ -281,6 +286,7 @@ public class Dashboard extends BaseActivity
                 PreferenceConnector.writeFloat(this, PreferenceConnector.USER_TOTAL_AMOUNT, Float.valueOf(total));
                 new PurchaseSummary().execute();
             } else {
+                yourAccountBalance = "0.00";
                 dialog.dismiss();
             }
         } catch (Exception e) {

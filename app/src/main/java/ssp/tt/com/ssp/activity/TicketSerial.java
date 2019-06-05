@@ -129,14 +129,15 @@ public class TicketSerial extends BaseActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int oldCount = PreferenceConnector.readInteger(TicketSerial.this, PreferenceConnector.BADGE_COUNT, 0);
-                badgeCount = oldCount + badgeCount;
-                PreferenceConnector.writeInteger(TicketSerial.this, PreferenceConnector.BADGE_COUNT, badgeCount);
-                isloaded = false;
-                Intent intent = getIntent();
-                intent.putExtra("badgeCount", badgeCount);
-                setResult(RESULT_OK, intent);
-                finish();
+//                int oldCount = PreferenceConnector.readInteger(TicketSerial.this, PreferenceConnector.BADGE_COUNT, 0);
+//                badgeCount = oldCount + badgeCount;
+//                PreferenceConnector.writeInteger(TicketSerial.this, PreferenceConnector.BADGE_COUNT, badgeCount);
+//                isloaded = false;
+//                Intent intent = getIntent();
+//                intent.putExtra("badgeCount", badgeCount);
+//                setResult(RESULT_OK, intent);
+//                finish();
+                startActivity(new Intent(TicketSerial.this, TicketType.class));
             }
         });
 
