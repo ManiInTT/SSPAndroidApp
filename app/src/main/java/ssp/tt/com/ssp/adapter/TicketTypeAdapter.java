@@ -55,6 +55,11 @@ public class TicketTypeAdapter extends HFRecyclerViewAdapter<Ticket, TicketTypeA
         } else {
             holder.viewRight.setVisibility(View.VISIBLE);
         }
+
+        holder.tvSeriousCount.setVisibility(View.GONE);
+        holder.tvDrawDate.setVisibility(View.GONE);
+        holder.tvINR.setVisibility(View.GONE);
+        holder.viewRight.setVisibility(View.GONE);
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder {

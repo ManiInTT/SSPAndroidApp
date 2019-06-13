@@ -59,6 +59,7 @@ public class TransactionHistory extends BaseActivity {
     JSONArray questionArray = new JSONArray();
 
     public int API_TYPE = 1;
+    public String APPROVED = "1";
     public final int API_TRANSACTION_HISTORY = 1;
     public final int API_REQUEST_STATMENT = 2;
 
@@ -99,6 +100,9 @@ public class TransactionHistory extends BaseActivity {
 
     @OnClick(R.id.tv_approved)
     public void setApproved(View v) {
+        APPROVED = "1";
+        new TransactionHistory.getTransactionList().execute();
+
         tvApproved.setTextColor(getResources().getColor(R.color.black));
         tvPending.setTextColor(getResources().getColor(R.color.textColor));
         tvRejected.setTextColor(getResources().getColor(R.color.textColor));
@@ -110,6 +114,9 @@ public class TransactionHistory extends BaseActivity {
 
     @OnClick(R.id.tv_pending)
     public void setPending(View v) {
+        APPROVED = "0";
+        new TransactionHistory.getTransactionList().execute();
+
         tvApproved.setTextColor(getResources().getColor(R.color.textColor));
         tvPending.setTextColor(getResources().getColor(R.color.black));
         tvRejected.setTextColor(getResources().getColor(R.color.textColor));
@@ -120,6 +127,9 @@ public class TransactionHistory extends BaseActivity {
 
     @OnClick(R.id.tv_rejected)
     public void setRejected(View v) {
+        APPROVED = "3";
+        new TransactionHistory.getTransactionList().execute();
+
         tvApproved.setTextColor(getResources().getColor(R.color.textColor));
         tvPending.setTextColor(getResources().getColor(R.color.textColor));
         tvRejected.setTextColor(getResources().getColor(R.color.black));
@@ -467,7 +477,8 @@ public class TransactionHistory extends BaseActivity {
             try {
                 String UserId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
                 String imeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
-                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1");
+
+                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1",APPROVED);
             } catch (Exception e) {
                 e.printStackTrace();
             }

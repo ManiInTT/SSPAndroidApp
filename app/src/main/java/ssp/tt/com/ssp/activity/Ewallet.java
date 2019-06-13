@@ -555,7 +555,7 @@ public class Ewallet extends BaseActivity {
             try {
                 String UserId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
                 String imeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
-                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1");
+                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1","");
             } catch (Exception e) {
                 e.printStackTrace();
             }

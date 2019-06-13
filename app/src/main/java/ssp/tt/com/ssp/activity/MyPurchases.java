@@ -211,7 +211,7 @@ public class MyPurchases extends BaseActivity {
                     String trans_amount = jsonObject.getString("trans_amount");
                     String no_of_units = jsonObject.getString("no_of_units");
                     String pur_date = jsonObject.getString("pur_date");
-                    pur_date = Util.convertLocalDate(pur_date);
+                   // pur_date = Util.convertLocalDate(pur_date);
 
                     MyPurchasesModel myPurchasesModel = new MyPurchasesModel(pur_id, pur_date, trans_amount, no_of_units);
                     myPurchasesModelArrayList.add(myPurchasesModel);

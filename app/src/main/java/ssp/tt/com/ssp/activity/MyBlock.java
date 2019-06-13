@@ -292,7 +292,7 @@ public class MyBlock extends BaseActivity {
                     String ticketTypeName = jsonObject.getString("ltype_name");
                     String drawCode = jsonObject.getString("draw_code");
                     String drawDate = jsonObject.getString("draw_date");
-                    drawDate = Util.convertLocalDate(drawDate);
+                   // drawDate = Util.convertLocalDate(drawDate);
                     String blkId = jsonObject.getString("blk_id");
                     String totalNumbers = jsonObject.getString("tot_members");
                     String prizeAmount = "";

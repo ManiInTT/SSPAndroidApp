@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ssp.tt.com.ssp.R;
 import ssp.tt.com.ssp.model.MyBlockResultDao;
+import ssp.tt.com.ssp.utils.Util;
 
 public class MyBlockResultNewAdapter extends HFRecyclerViewAdapter<MyBlockResultDao, MyBlockResultNewAdapter.DataViewHolder> {
 
@@ -49,7 +50,9 @@ public class MyBlockResultNewAdapter extends HFRecyclerViewAdapter<MyBlockResult
         holder.tvMembers.setText(myBlockResultDao.getMember());
         holder.tvPrize.setText(myBlockResultDao.getPrize());
         holder.block_name.setText(myBlockResultDao.getBlockName());
-        holder.drawcode_date.setText(myBlockResultDao.getDrawCode() + " & " + myBlockResultDao.getDate());
+        String dd = myBlockResultDao.getDate();
+        holder.drawcode_date.setText(myBlockResultDao.getDrawCode() + " & " + dd);
+        //holder.drawcode_date.setText(Util.convertLocalDateTime(myBlockResultDao.getDate()));
 
         if (myBlockResultDao.getPrize().equals("")) {
             holder.tvPrizeTxt.setVisibility(View.GONE);

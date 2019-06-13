@@ -44,6 +44,7 @@ public class MyPurchasesAdapter extends HFRecyclerViewAdapter<MyPurchasesModel, 
             holder.drawcode_date.setVisibility(View.GONE);
             holder.tvPrizeTxt.setVisibility(View.GONE);
             holder.tvPrize.setVisibility(View.GONE);
+            holder.blockType.setVisibility(View.GONE);
 
 
         holder.tvTicketName.setText(myPurchasesModelArrayList.getPur_date());

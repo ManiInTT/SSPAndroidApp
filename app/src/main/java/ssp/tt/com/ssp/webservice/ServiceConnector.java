@@ -1236,10 +1236,10 @@ public class ServiceConnector {
         }
     }
 
-    public void getTransactionList(Context context, String user_id, String user_imei_number, String page_no) {
+    public void getTransactionList(Context context, String user_id, String user_imei_number, String page_no, String approved) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.getTransactionList(user_id, user_imei_number, page_no);
+            Call<ResponseBody> call = request.getTransactionList(user_id, user_imei_number, page_no,approved);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

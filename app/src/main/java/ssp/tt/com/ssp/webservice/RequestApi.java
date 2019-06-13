@@ -105,7 +105,7 @@ public interface RequestApi {
     @POST("customertrans/viewusertrans")
     Call<ResponseBody> getTransactionList(@Field("user_id") String user_id,
                                           @Field("user_imei_number") String user_imei_number,
-                                          @Field("page_no") String page_no);
+                                          @Field("page_no") String page_no,@Field("approved") String approved);
     @FormUrlEncoded
     @POST("customertrans/withdrawrequesthistory")
     Call<ResponseBody> getWithdrawRequestHistory(@Field("user_id") String user_id,
