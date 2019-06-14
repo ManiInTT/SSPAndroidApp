@@ -113,6 +113,7 @@
     <string name="err_msg_dob">Enter date of birth</string>
     <string name="you_have">You have</string>
     <string name="trans_details">Transaction details</string>
+    <string name="my_pur_details">My Purchases details</string>
     <string name="trans_id">ID</string>
     <string name="trans_date">Date</string>
     <string name="trans_amount">Amount</string>
@@ -128,6 +129,7 @@
     <string name="title_activity_my_black_result">My Block Result</string>
     <string name="title_activity_my_block">My Block</string>
     <string name="title_activity_my_purchases">My Purchases</string>
+    <string name="title_activity_my_purchases_details">My Purchases Details</string>
     <string name="title_activity_my_block_details">My Block Details</string>
     <string name="title_activity_my_black_result_history">My Block Result History</string>
     <string name="title_activity_black_result_history">Block Result History</string>

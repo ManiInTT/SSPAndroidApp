@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ssp.tt.com.ssp.R;
+import ssp.tt.com.ssp.model.MyBlockResultDao;
 import ssp.tt.com.ssp.support.PreferenceConnector;
 import ssp.tt.com.ssp.utils.ProgressUtil;
 import ssp.tt.com.ssp.utils.Util;
@@ -88,7 +89,7 @@ public class MyBlockDetails extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result_details);
+        setContentView(R.layout.activity_my_block_details);
         ButterKnife.bind(this);
         registerBaseActivityReceiver();
         getWidgetConfig();
@@ -127,6 +128,7 @@ public class MyBlockDetails extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         blockId = getIntent().getStringExtra("blockId");
+
 
     }
 

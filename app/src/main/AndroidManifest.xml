@@ -207,6 +207,20 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".activity.MyBlockDetails"
+            android:label="Country Selection"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".activity.MyPurchasesDetails"
+            android:label="Country Selection"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".activity.MyBlock"
             android:label="Country Selection"
             android:screenOrientation="portrait"

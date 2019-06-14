@@ -137,10 +137,17 @@ public class MyBlock extends BaseActivity {
             @Override
             public void onClick(View view, final int position) {
                 try {
-                    MyBlockResultDao myBlockResultDao = myBlockResultDaoList.get(position - 1);
+
+                    Log.d("df","Testr");
+
+                    MyBlockResultDao myBlockResultDao = myBlockResultDaoList.get(position);
+//                    Intent intent = new Intent(MyBlock.this, MyBlockDetails.class);
+//                    intent.putExtra("blockId", myBlockResultDao.getBlockId());
+//                    startActivityForResult(intent, 1);
+                    Log.d("df","Testr" + myBlockResultDao.getBlockId());
                     Intent intent = new Intent(MyBlock.this, MyBlockDetails.class);
                     intent.putExtra("blockId", myBlockResultDao.getBlockId());
-                    startActivityForResult(intent, 1);
+                    startActivity(intent);
                 } catch (Exception e) {
 
                 }

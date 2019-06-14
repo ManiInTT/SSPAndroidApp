@@ -10,14 +10,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_gravity="center_vertical|clip_horizontal"
         android:orientation="vertical">
+        <TableLayout
+            android:id="@+id/main_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"
+            android:stretchColumns="0,1" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/gv_my_purchases"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center" />
+            android:gravity="center"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
