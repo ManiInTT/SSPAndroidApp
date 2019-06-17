@@ -48,13 +48,13 @@ public class Dashboard extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     GridView androidGridView;
     String[] DashboardMenuTexts = {
-            "My eWallet", "Result", "Buy ticket", "Gift the ticket", "Withdrawal", "My blocks", "My Purchases","My Profile", "Support"
+            "My eWallet", "Result", "Buy ticket", "Withdrawal", "My blocks", "My Purchases", "My Profile", "Support"
     };
     int[] DashboardMenuIcons = {
             R.string.icon_wallet,
             R.string.icon_result,
             R.string.icon_ticket,
-            R.string.icon_gift_ticket,
+            //R.string.icon_gift_ticket,
             R.string.icon_withdrawal,
             R.string.icon_blocks,
             R.string.icon_withdrawal,
@@ -149,17 +149,17 @@ public class Dashboard extends BaseActivity
                     startActivity(new Intent(Dashboard.this, ResultActivity.class));
                 } else if (pos == 2) {
                     startActivity(new Intent(Dashboard.this, TicketType.class));
-                } else if (pos == 4) {
+                } else if (pos == 3) {
                     new CheckRegisterWithBank().execute();
-                } else if (pos == 5) {
+                } else if (pos == 4) {
                     startActivity(new Intent(Dashboard.this, MyBlock.class));
-                } else if (pos == 6) {
+                } else if (pos == 5) {
                     startActivity(new Intent(Dashboard.this, MyPurchases.class));
-                } else if (pos == 7) {
+                } else if (pos == 6) {
                     Intent intent = new Intent(Dashboard.this, Profile.class);
                     intent.putExtra("pageRequestFlag", "UPDATE");
                     startActivity(intent);
-                } else if (pos == 8) {
+                } else if (pos == 7) {
                     Intent intent = new Intent(Dashboard.this, Support.class);
                     startActivity(intent);
                 }
