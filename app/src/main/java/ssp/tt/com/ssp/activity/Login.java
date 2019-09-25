@@ -2,10 +2,8 @@ package ssp.tt.com.ssp.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,9 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rey.material.app.DialogFragment;
-import com.rey.material.app.SimpleDialog;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,9 +41,7 @@ import ssp.tt.com.ssp.utils.Util;
 import ssp.tt.com.ssp.webservice.ServiceConnector;
 import ssp.tt.com.ssp.webservice.WebServiceUtil;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_PHONE_STATE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /*******************************************************************************
  * Class Name   :   Login
@@ -372,6 +365,20 @@ public class Login extends BaseActivity implements View.OnClickListener {
                 PreferenceConnector.writeString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, userImeiNumber);
                 PreferenceConnector.writeString(getApplicationContext(), PreferenceConnector.USER_ID, (responseJSONObject.getString(userLoginRequest.USER_ID)));
                 PreferenceConnector.writeString(getApplicationContext(), PreferenceConnector.USER_EMAIL, responseJSONObject.getString("user_email"));
+
+
+                String firstName = "", lastName = "";
+
+
+                if (responseJSONObject.has("user_first_name")) {
+                    firstName = responseJSONObject.getString("user_first_name");
+                }
+                if (responseJSONObject.has("user_last_name")) {
+                    lastName = responseJSONObject.getString("user_last_name");
+                }
+
+
+                PreferenceConnector.writeString(getApplicationContext(), PreferenceConnector.USER_NAME, firstName + " " + lastName);
                 Intent intent = new Intent(this, LoginPassword.class);
                 Bundle extras = getIntent().getExtras();
                 pageRequestFlag = extras.getString("pageRequestFlag");

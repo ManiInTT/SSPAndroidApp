@@ -16,12 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true" />
 
-
         <ImageView
-            android:id="@+id/splash_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:background="@drawable/ic_logo" />
+
     </RelativeLayout>
 </LinearLayout>
