@@ -8,12 +8,12 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -103,6 +102,14 @@ public class WithDraw extends BaseActivity {
 
     }
 
+    @OnClick(R.id.tvPendingWihdraw)
+    public void setPendingWithdraw(View view) {
+        Intent intent = new Intent(this, TransactionHistory.class);
+        intent.putExtra(TransactionHistory.OPEN_TAB, 2);
+        startActivity(intent);
+    }
+
+
     @OnClick(R.id.btn_with_draw)
     public void setBtnWithDraw(View view) {
         if (etAmount.getText().toString().trim().length() == 0) {
@@ -132,7 +139,7 @@ public class WithDraw extends BaseActivity {
                 if (!currentAmount.equals("")) {
                     double withDrawAmount = Double.valueOf(currentAmount);
                     double amountTotal = totalAmount - withDrawAmount;
-                    if (amountTotal >= 0) {
+                    if (amountTotal > 0) {
                         String mystring = getResources().getString(R.string.rs);
                         tvBalanceAmount.setText(mystring + NumberFormat.getNumberInstance(Locale.US).format(amountTotal));
                         btnWithDraw.setEnabled(true);
@@ -247,29 +254,29 @@ public class WithDraw extends BaseActivity {
         if (requestSentFlag.equals("1")) {
 
 
-        try {
+            try {
 
-            if (requestFlag.equals("1")) {
-                System.out.println("Transaction  Details" + response);
-                JSONObject mJSONObject = new JSONObject(response);
-                int mCode = mJSONObject.getInt(apiRequest.statusCode);
-                if (mCode == apiRequest.codeSuccess) {
-                    addHeaders();
-                    String data = mJSONObject.getString(apiRequest.data);
-                    //JSONObject jsonData = new JSONObject(data);
-                    JSONArray questionArray = new JSONArray(data);
-                    TableLayout tl = findViewById(R.id.main_table);
-                    for (int qIndex = 0; qIndex < 10; qIndex++) {
-                        System.out.println("Width draw  Details" + questionArray.get(qIndex));
+                if (requestFlag.equals("1")) {
+                    System.out.println("Transaction  Details" + response);
+                    JSONObject mJSONObject = new JSONObject(response);
+                    int mCode = mJSONObject.getInt(apiRequest.statusCode);
+                    if (mCode == apiRequest.codeSuccess) {
+                        addHeaders();
+                        String data = mJSONObject.getString(apiRequest.data);
+                        //JSONObject jsonData = new JSONObject(data);
+                        JSONArray questionArray = new JSONArray(data);
+                        TableLayout tl = findViewById(R.id.main_table);
+                        for (int qIndex = 0; qIndex < 10; qIndex++) {
+                            System.out.println("Width draw  Details" + questionArray.get(qIndex));
 
-                        TableRow tr = new TableRow(this);
-                        tr.setLayoutParams(getLayoutParams());
-                        tr.addView(getTextView(qIndex + 1, Util.convertLocalDateTime(new JSONObject(questionArray.get(qIndex).toString()).getString("wr_date")), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
-                        tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_status"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
-                        tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_amt"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
-                        tl.addView(tr, getTblLayoutParams());
+                            TableRow tr = new TableRow(this);
+                            tr.setLayoutParams(getLayoutParams());
+                            tr.addView(getTextView(qIndex + 1, Util.convertLocalDateTime(new JSONObject(questionArray.get(qIndex).toString()).getString("wr_date")), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                            tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_status"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                            tr.addView(getTextView(qIndex + questionArray.length(), new JSONObject(questionArray.get(qIndex).toString()).getString("wr_amt"), ContextCompat.getColor(this, R.color.textColor), Typeface.NORMAL, ContextCompat.getColor(this, R.color.white)));
+                            tl.addView(tr, getTblLayoutParams());
+                        }
                     }
-                }
 //                else {
 //                    WebServiceUtil userLoginRequest = new WebServiceUtil();
 //                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(userLoginRequest.desc);
@@ -277,11 +284,10 @@ public class WithDraw extends BaseActivity {
 //                    String description = jsonObjectDesc.getString(userLoginRequest.description);
 //                    Util.warningAlertDialog(this, title, description, 0);
 //                }
+                }
+            } catch (JSONException mException) {
+                Log.i("JSONException ffff", mException.getMessage());
             }
-        }
-        catch (JSONException mException) {
-            Log.i("JSONException ffff", mException.getMessage());
-        }
 
         }
         if (API_TYPE == API_WITH_DRAW) {
@@ -354,9 +360,6 @@ public class WithDraw extends BaseActivity {
                 Util.warningAlertDialog(this, getResources().getString(R.string.warning), mException.toString(), 0);
             }
         }
-
-
-
 
 
     }

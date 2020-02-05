@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 
@@ -44,6 +45,7 @@ public class Util {
 
     boolean isOpen = false;
     static WebServiceUtil apiRequest;
+    public static String EXCEPTION = "Exception";
 
     public void keyboardDisable(Activity mActivity, View v) {
         InputMethodManager iManager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -242,6 +244,8 @@ public class Util {
     }
 
     public static String convertMd5(String imei) {
+        if(imei==null)
+            imei="Test123456";
         String convertedImei = null;
         MessageDigest mdEnc;
         try {

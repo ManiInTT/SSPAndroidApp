@@ -2,9 +2,9 @@ package ssp.tt.com.ssp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -42,7 +42,7 @@ public class ResultActivity extends BaseActivity {
     private void setListView() {
         ArrayList<ResultMenu> menuList = new ArrayList<>();
         menuList.add(new ResultMenu("My result", menuIcon[0]));
-        menuList.add(new ResultMenu("Block result", menuIcon[1]));
+        //menuList.add(new ResultMenu("Block result", menuIcon[1]));
         menuList.add(new ResultMenu("Overall", menuIcon[2]));
         ResultMenuAdapter menuAdapter = new ResultMenuAdapter(menuList);
         int spacingInPixels = 20;

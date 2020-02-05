@@ -10,9 +10,10 @@
 
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
+        android:layout_above="@+id/iv_bottom"
         android:fitsSystemWindows="true"
         android:scrollbars="none">
 
@@ -39,6 +40,7 @@
                     android:background="@drawable/edittext_white"
                     android:clickable="true"
                     android:cursorVisible="false"
+                    android:hint="@string/please_select_bank"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:inputType="textNoSuggestions"
@@ -51,7 +53,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    android:background="#469394"
+                    android:background="#FF8911"
                     android:gravity="center"
                     android:text="@string/icon_down_arrow"
                     android:textColor="@android:color/white"
@@ -65,11 +67,11 @@
                     android:visibility="invisible" />
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_bank_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="8dp">
 
                 <EditText
@@ -82,10 +84,10 @@
 
 
                 </EditText>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_account_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,9 +104,9 @@
 
 
                 </EditText>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,9 +123,9 @@
 
 
                 </EditText>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_account_ifsc_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,49 +144,41 @@
 
 
                 </EditText>
-            </android.support.design.widget.TextInputLayout>
-
-
-            <LinearLayout
-                android:id="@+id/iv_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="25dp"
-                android:layout_weight="2"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_update"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/buttonColor"
-                    android:padding="10dp"
-                    android:text="@string/update"
-                    android:textColor="@color/appTextColor"
-                    android:textSize="17sp" />
-
-                <Button
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/buttonColor"
-                    android:padding="10dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/appTextColor"
-                    android:textSize="17sp" />
-            </LinearLayout>
-
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/iv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@color/buttonColor"
+            android:padding="12dp"
+            android:text="@string/update"
+            android:textColor="@color/appTextColor" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="@color/buttonColor"
+            android:padding="12dp"
+            android:text="@string/cancel"
+            android:textColor="@color/appTextColor" />
+    </LinearLayout>
 
 
 </RelativeLayout>

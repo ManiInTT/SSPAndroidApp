@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,6 +54,7 @@ public class MyResult extends BaseActivity {
     View footerView;
     TextView tvTotalEarning;
     TextView tvTotalEarningTitle;
+    TextView tvOverAll;
 
     MyResultNewAdapter myResultAdapter;
     final ArrayList<MyBlockResultDao> myBlockResultDaoList = new ArrayList<>();
@@ -61,7 +62,7 @@ public class MyResult extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_type);
+        setContentView(R.layout.activity_my_result);
         ButterKnife.bind(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.title_activity_dashboard));
@@ -87,7 +88,7 @@ public class MyResult extends BaseActivity {
                     });
             snackbar.setActionTextColor(Color.RED);
             View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
@@ -116,6 +117,15 @@ public class MyResult extends BaseActivity {
                 showMonthYear();
             }
         });
+        tvOverAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyResult.this, OverAllBlock.class);
+                startActivity(intent);
+            }
+        });
+
+
         myResultAdapter.setFooterView(footerView);
     }
 
@@ -144,6 +154,7 @@ public class MyResult extends BaseActivity {
         serviceConnector.registerCallback(this);
         apiRequest = new WebServiceUtil();
         Toolbar toolbar = findViewById(R.id.toolbar);
+        tvOverAll = findViewById(R.id.tv_over_all);
         toolbar.setTitle(getString(R.string.title_activity_my_result));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

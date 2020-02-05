@@ -1,10 +1,27 @@
 package ssp.tt.com.ssp.webservice;
 
+import android.content.Context;
+
+import ssp.tt.com.ssp.support.PreferenceConnector;
+
 public class WebServiceUtil {
 
     //test url
     //public static String baseUrl = "http://www.mmg.tainn-tech.com/ssprest/";
-    public static String baseUrl = "http://sspapibeta.tainn-tech.com/";
+    public static String BETA_URL = "http://sspapibeta.tainn-tech.com/";
+    public static String DEVELOPMENT_URL = "http://sspapidev.tainn-tech.com/";
+
+    public static String getAppUrl(Context context) {
+        String baseUrl = "";
+        int urlId = PreferenceConnector.readInteger(context, PreferenceConnector.APP_URL, 1);
+        if (urlId == 1) {
+            baseUrl = BETA_URL;
+        } else if (urlId == 2) {
+            baseUrl = DEVELOPMENT_URL;
+        }
+        return baseUrl;
+
+    }
 
 
     //common value
@@ -91,9 +108,6 @@ public class WebServiceUtil {
     public String ts_status = "ts_status";
     public String ts_comment = "ts_comment";
     public String ts_comments = "ts_comments";
-
-
-
 
 
 }

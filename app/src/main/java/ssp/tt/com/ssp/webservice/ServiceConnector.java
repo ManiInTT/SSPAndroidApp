@@ -1,7 +1,7 @@
 package ssp.tt.com.ssp.webservice;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -12,9 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -52,7 +50,7 @@ public class ServiceConnector {
                 .readTimeout(30, TimeUnit.SECONDS);
         builder.build();
         OkHttpClient okHttpClient = builder.build();
-        return new Builder().baseUrl(WebServiceUtil.baseUrl).addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build();
+        return new Builder().baseUrl(WebServiceUtil.getAppUrl(context)).addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build();
     }
 
     private void onReadSuccess(Response<ResponseBody> response) {
@@ -878,10 +876,10 @@ public class ServiceConnector {
         }
     }
 
-    public void withDrawRequestAPI(Context context, String user_id, String user_imei_number,String amount) {
+    public void withDrawRequestAPI(Context context, String user_id, String user_imei_number, String amount) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.withDrawRequest(user_id, user_imei_number,amount);
+            Call<ResponseBody> call = request.withDrawRequest(user_id, user_imei_number, amount);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -922,10 +920,10 @@ public class ServiceConnector {
     }
 
 
-    public void termsRequestAPI(Context context, String user_id, String user_imei_number,String terms) {
+    public void termsRequestAPI(Context context, String user_id, String user_imei_number, String terms) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.getTermsCondition(user_id, user_imei_number,terms);
+            Call<ResponseBody> call = request.getTermsCondition(user_id, user_imei_number, terms);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -964,16 +962,14 @@ public class ServiceConnector {
             onReadFail(errorMessage);
         }
     }
-
-
 
 
     public void saveBankAccount(Context context, String user_id, String user_imei_number,
-                                String bankId,String branchName,String accountNumber,String accountName,String ifscCode) {
+                                String bankId, String branchName, String accountNumber, String accountName, String ifscCode) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.saveAccountDetails(user_id, user_imei_number,bankId,
-                    branchName,accountNumber,accountName,ifscCode);
+            Call<ResponseBody> call = request.saveAccountDetails(user_id, user_imei_number, bankId,
+                    branchName, accountNumber, accountName, ifscCode);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -1015,10 +1011,10 @@ public class ServiceConnector {
 
 
     public void saveSupport(Context context, String user_id, String user_imei_number,
-                                String subject,String message) {
+                            String subject, String message) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.saveSupportRequest(user_id, user_imei_number,subject,message);
+            Call<ResponseBody> call = request.saveSupportRequest(user_id, user_imei_number, subject, message);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -1060,10 +1056,10 @@ public class ServiceConnector {
 
     public void getSupportRequestDetails(Context context, String user_id,
                                          String user_imei_number,
-                            String ctId) {
+                                         String ctId) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.getRequestSupportDetails(user_id, user_imei_number,ctId);
+            Call<ResponseBody> call = request.getRequestSupportDetails(user_id, user_imei_number, ctId);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -1146,7 +1142,6 @@ public class ServiceConnector {
             onReadFail(errorMessage);
         }
     }
-
 
 
     public void getRequestStatement(Context context, String user_id, String user_imei_number, String opt, String startDate, String endDate) {
@@ -1239,7 +1234,7 @@ public class ServiceConnector {
     public void getTransactionList(Context context, String user_id, String user_imei_number, String page_no, String approved) {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
-            Call<ResponseBody> call = request.getTransactionList(user_id, user_imei_number, page_no,approved);
+            Call<ResponseBody> call = request.getTransactionList(user_id, user_imei_number, page_no, approved);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1519,6 +1514,29 @@ public class ServiceConnector {
         try {
             RequestApi request = getRetrofit(context).create(RequestApi.class);
             Call<ResponseBody> call = request.getUserBlocks(userId, imeiNumber);
+            startAPI(call);
+        } catch (NullPointerException errorMessage) {
+            onReadFail(errorMessage);
+        }
+    }
+
+    public void profileImage(Context context, File imageChallon) {
+        try {
+            Log.i("IMAGE", " File name: " + imageChallon.getName());
+            RequestApi request = getRetrofit(context).create(RequestApi.class);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), imageChallon);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", imageChallon.getName(), requestFile);
+            Call<ResponseBody> call = request.profileImage(body);
+            startAPI(call);
+        } catch (Exception errorMessage) {
+            onReadFail(errorMessage);
+        }
+    }
+
+    public void saveProfileImage(Context context, String userId, String imeiNumber,String profilePath) {
+        try {
+            RequestApi request = getRetrofit(context).create(RequestApi.class);
+            Call<ResponseBody> call = request.saveProfileImage(userId, imeiNumber,profilePath);
             startAPI(call);
         } catch (NullPointerException errorMessage) {
             onReadFail(errorMessage);

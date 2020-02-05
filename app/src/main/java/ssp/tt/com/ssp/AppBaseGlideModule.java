@@ -1,11 +1,8 @@
-package vn.tungdx.mediapicker;
+package ssp.tt.com.ssp;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 
-/**
- * Created by IXM on 3/6/2018.
- */
 
 @GlideModule
 public class AppBaseGlideModule extends AppGlideModule {

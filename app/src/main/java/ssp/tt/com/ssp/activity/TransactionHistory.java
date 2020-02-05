@@ -10,11 +10,15 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.content.ContextCompat;
+
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,7 +66,7 @@ public class TransactionHistory extends BaseActivity {
     public String APPROVED = "1";
     public final int API_TRANSACTION_HISTORY = 1;
     public final int API_REQUEST_STATMENT = 2;
-
+    public static final String OPEN_TAB = "openTab";
 
     @BindView(R.id.main_table)
     TableLayout tl;
@@ -90,6 +94,19 @@ public class TransactionHistory extends BaseActivity {
         ButterKnife.bind(this);
         registerBaseActivityReceiver();
         getWidgetConfig();
+        if (getIntent().getIntExtra(OPEN_TAB, 1) == 1) {
+            APPROVED = "1";
+            tvApproved.setTextColor(getResources().getColor(R.color.black));
+            tvPending.setTextColor(getResources().getColor(R.color.textColor));
+            tvRejected.setTextColor(getResources().getColor(R.color.textColor));
+        } else {
+            APPROVED = "0";
+            tvApproved.setTextColor(getResources().getColor(R.color.textColor));
+            tvPending.setTextColor(getResources().getColor(R.color.black));
+            tvRejected.setTextColor(getResources().getColor(R.color.textColor));
+        }
+
+
         serviceRequest();
         Calendar now = Calendar.getInstance();
         pYear = now.get(Calendar.YEAR);
@@ -150,24 +167,10 @@ public class TransactionHistory extends BaseActivity {
         final TextView btnCancel = dialog.findViewById(R.id.cancel_btn);
         final TextView btnOk = dialog.findViewById(R.id.ok_btn);
         final EditText etFromDate = dialog.findViewById(R.id.et_from_date);
-        final TextView ivFromDate = dialog.findViewById(R.id.iv_from_date);
         final EditText etToDate = dialog.findViewById(R.id.et_to_date);
-        final TextView ivToDate = dialog.findViewById(R.id.iv_to_date);
         fromDate = null;
         toDate = null;
-        etToDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivToDate.performClick();
-            }
-        });
         etFromDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivFromDate.performClick();
-            }
-        });
-        ivFromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionHistory.this, R.style.datepickerCustom, new DatePickerDialog.OnDateSetListener() {
@@ -197,8 +200,7 @@ public class TransactionHistory extends BaseActivity {
                 datePickerDialog.show();
             }
         });
-
-        ivToDate.setOnClickListener(new View.OnClickListener() {
+        etToDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionHistory.this, R.style.datepickerCustom, new DatePickerDialog.OnDateSetListener() {
@@ -336,7 +338,7 @@ public class TransactionHistory extends BaseActivity {
         isInternetPresent = mConnectionDetector.isNetworkAvailable();
         if (isInternetPresent) {
 
-            new TransactionHistory.getTransactionList().execute();
+            new getTransactionList().execute();
 
         } else {
             Snackbar snackbar;
@@ -356,7 +358,7 @@ public class TransactionHistory extends BaseActivity {
             group.setBackgroundColor(ContextCompat.getColor(TransactionHistory.this, R.color.colorPrimary));
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
             snackbar.show();
         }
@@ -392,7 +394,15 @@ public class TransactionHistory extends BaseActivity {
                     questionArray = new JSONArray(jsonData.getString("transactions"));
                     tl.removeAllViews();
                     addHeaders();
-                    loadTable("Approved");
+
+                    if (APPROVED.equals("1")) {
+                        loadTable("Approved");
+                    } else if (APPROVED.equals("0")) {
+                        loadTable("Pending");
+                    } else {
+                        loadTable("Rejected");
+
+                    }
                 } else {
                     WebServiceUtil webServiceUtil = new WebServiceUtil();
                     JSONObject jsonObjectDesc = jsonObject.getJSONObject(webServiceUtil.desc);
@@ -478,7 +488,7 @@ public class TransactionHistory extends BaseActivity {
                 String UserId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
                 String imeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
 
-                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1",APPROVED);
+                serviceConnector.getTransactionList(getApplicationContext(), UserId, imeiNumber, "1", APPROVED);
             } catch (Exception e) {
                 e.printStackTrace();
             }

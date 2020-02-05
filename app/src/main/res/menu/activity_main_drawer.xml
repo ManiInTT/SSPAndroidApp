@@ -5,34 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/my_wallet"
-            android:title="My wallet" />
+            android:id="@+id/nav_profile"
+            android:title="Profile" />
         <item
-            android:id="@+id/nav_result"
-            android:title="Result" />
-        <item
-            android:id="@+id/buy_ticket"
-            android:title="Buy ticket" />
-        <item
-            android:id="@+id/nav_manage"
-            android:title="Gift the ticket" />
-        <item
-            android:id="@+id/nav_with_drawal"
-            android:title="Withdrawal" />
-        <item
-            android:id="@+id/profile"
-            android:title="My Profile" />
-        <item
-
-            android:title="Settings" />
-        <item
-            android:id="@+id/change_password"
+            android:id="@+id/nav_change_password"
             android:title="Change Password" />
+
+        <item
+            android:id="@+id/nav_terms_conditions"
+            android:title="Terms &amp; Condition" />
+        <item
+            android:id="@+id/nav_support"
+            android:title="Support request" />
+        <item
+            android:id="@+id/nav_contactus"
+            android:title="Contact us" />
         <item
             android:id="@+id/logout"
             android:title="Logout" />
     </group>
-
 
 
 </menu>

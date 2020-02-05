@@ -185,7 +185,7 @@
     <string name="please_enter_bank_id">Please enter bank id</string>
     <string name="please_enter_bank_name">Please enter bank name</string>
     <string name="please_enter_branch_name">Please enter branch name</string>
-
+    <string name="please_select_bank">Select bank</string>
     <string name="please_enter_all_fields">Please enter all fields</string>
 
 

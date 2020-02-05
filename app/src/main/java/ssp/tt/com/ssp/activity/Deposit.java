@@ -1,20 +1,15 @@
 package ssp.tt.com.ssp.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,24 +24,21 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,11 +52,6 @@ import ssp.tt.com.ssp.utils.ProgressUtil;
 import ssp.tt.com.ssp.utils.Util;
 import ssp.tt.com.ssp.webservice.ServiceConnector;
 import ssp.tt.com.ssp.webservice.WebServiceUtil;
-import vn.tungdx.mediapicker.MediaItem;
-import vn.tungdx.mediapicker.MediaOptions;
-import vn.tungdx.mediapicker.activities.MediaPickerActivity;
-
-import static vn.tungdx.mediapicker.activities.MediaPickerActivity.getMediaItemSelected;
 
 public class Deposit extends BaseActivity {
 
@@ -80,11 +67,7 @@ public class Deposit extends BaseActivity {
     private int API_ACCOUNT_DETAILS = 4;
     private int API_REMOVE_IMAGE = 5;
 
-    MediaOptions.Builder builder;
-    public static final String EXTRA_MEDIA_OPTIONS = "extra_media_options";
-    File file;
-    private static final int REQUEST_MEDIA = 1;
-    List<MediaItem> mMediaSelectedList;
+    public final static int IMAGE_REQUEST = 201;
     File receiptFile = null;
 
 
@@ -189,7 +172,7 @@ public class Deposit extends BaseActivity {
     String modeOfDeposit = "Cash";
     String bankId = "";
     String errorMessage;
-    String title ="";
+    String title = "";
     String uploadImageName = "";
 
 
@@ -312,13 +295,22 @@ public class Deposit extends BaseActivity {
 
     @OnClick(R.id.et_receipt_challon)
     public void addReceiptImage() {
-        builder = new MediaOptions.Builder();
-        file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), new Random().nextLong() + ".jpg");
-        MediaOptions options = builder.setIsCropped(true).setFixAspectRatio(true).setCroppedFile(file).build();
-        Intent intent = new Intent(this, MediaPickerActivity.class);
-        intent.putExtra(EXTRA_MEDIA_OPTIONS, options);
-        startActivityForResult(intent, REQUEST_MEDIA);
+        pickImage(IMAGE_REQUEST, CropImageView.CropShape.RECTANGLE, 4, 4);
+
     }
+
+
+    @Override
+    public void onImageChosen(int requestCode, Uri uri) {
+        super.onImageChosen(requestCode, uri);
+        if (IMAGE_REQUEST == requestCode) {
+            File file = new File(uri.getPath());
+            this.receiptFile = file;
+            tvPath.setText(receiptFile.getName());
+            tvPath.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     @OnClick(R.id.btn_cancel)
     public void depositCancel() {
@@ -367,7 +359,7 @@ public class Deposit extends BaseActivity {
                         new DepositImageUploadAPI().execute();
                     }
 
-                } else if (modeOfDeposit.equals("DemandDraft")) {
+                } else if (modeOfDeposit.equals("DD")) {
                     if (etAmount.getText().toString().trim().length() == 0) {
                         Util.warningAlertDialog(this, getResources().getString(R.string.warning), getResources().getString(R.string.please_enter_amount), 0);
                     } else if (Integer.valueOf(etAmount.getText().toString().trim()) == 0) {
@@ -421,7 +413,7 @@ public class Deposit extends BaseActivity {
                     });
             snackbar.setActionTextColor(Color.RED);
             View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
@@ -463,7 +455,7 @@ public class Deposit extends BaseActivity {
             if (modeOfDeposit.equals("Cash")) {
                 radioButtonCash.setText("Cash");
                 radioButtonCheque.setText("Cheque");
-                radioButtonDraft.setText("DemandDraft");
+                radioButtonDraft.setText("DD");
                 tvAccountNumber.setText("Account number");
                 tvChequeNumber.setText("Cheque Number");
                 tvCheckDate.setText("Cheque Date");
@@ -475,17 +467,17 @@ public class Deposit extends BaseActivity {
                 llCash.setVisibility(View.GONE);
                 radioButtonCash.setText("Cash");
                 radioButtonCheque.setText("Cheque");
-                radioButtonDraft.setText("DemandDraft");
+                radioButtonDraft.setText("DD");
                 tvAccountNumber.setText("Account number");
                 tvChequeNumber.setText("Cheque Number");
                 tvReceiptChallan.setText("Receipt /  bank challan");
                 tvCheckDate.setText("Cheque Date");
-            } else if (modeOfDeposit.equals("DemandDraft")) {
+            } else if (modeOfDeposit.equals("DD")) {
                 llCheque.setVisibility(View.VISIBLE);
                 llCash.setVisibility(View.GONE);
                 radioButtonCash.setText("Cash");
                 radioButtonCheque.setText("Cheque");
-                radioButtonDraft.setText("DemandDraft");
+                radioButtonDraft.setText("DD");
                 tvAccountNumber.setVisibility(View.GONE);
                 etAccoutNumber.setVisibility(View.GONE);
                 tvChequeNumber.setText("Demand draft number");
@@ -531,7 +523,7 @@ public class Deposit extends BaseActivity {
     @OnClick(R.id.tv_draft)
     public void setDraft() {
         if (radioButtonDraft.isChecked()) {
-            modeOfDeposit = "DemandDraft";
+            modeOfDeposit = "DD";
         }
         setView();
     }
@@ -551,7 +543,7 @@ public class Deposit extends BaseActivity {
                     });
             snackbar.setActionTextColor(Color.RED);
             View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
@@ -594,27 +586,6 @@ public class Deposit extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unRegisterBaseActivityReceiver();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_MEDIA) {
-            mMediaSelectedList = getMediaItemSelected(data);
-            if (mMediaSelectedList != null) {
-                for (MediaItem mediaItem : mMediaSelectedList) {
-                    if (mediaItem.getUriCropped() == null) {
-                        receiptFile = new File(mediaItem.getUriOrigin().getPath());
-                    } else {
-                        receiptFile = new File(mediaItem.getUriCropped().getPath());
-                    }
-                    tvPath.setText(receiptFile.getName());
-                    tvPath.setVisibility(View.VISIBLE);
-                }
-            } else {
-                Log.e("Media Picker", "Error to get media, NULL");
-            }
-        }
     }
 
 
@@ -729,7 +700,7 @@ public class Deposit extends BaseActivity {
                                 transMode, transAmount, transNotes, transChequeDate, transChequeNumber, transAccountNumber, transBankId,
                                 transBankIFSC, params[0]);
 
-                    } else if (modeOfDeposit.equals("DemandDraft")) {
+                    } else if (modeOfDeposit.equals("DD")) {
                         String transDate = etDate.getText().toString();
                         String transBaId = "1";
                         String transMode = "2";
@@ -749,9 +720,9 @@ public class Deposit extends BaseActivity {
                     String transMode = "4";
                     if (modeOfDeposit.equals("Cash")) {
                         transMode = "4";
-                    } else if (modeOfDeposit.equals("Cash")) {
+                    } else if (modeOfDeposit.equals("Cheque")) {
                         transMode = "5";
-                    } else if (modeOfDeposit.equals("Cash")) {
+                    } else if (modeOfDeposit.equals("DD")) {
                         transMode = "6";
                     }
                     String transDate = etDate.getText().toString();
@@ -781,7 +752,7 @@ public class Deposit extends BaseActivity {
     public void callbackReturn(String response) {
         if (API_TYPE == API_ALL_BANK_LIST) {
             getBankAPIResponse(response);
-        }else if (API_TYPE == API_ACCOUNT_DETAILS) {
+        } else if (API_TYPE == API_ACCOUNT_DETAILS) {
             getAccountDetails(response);
         } else if (API_TYPE == API_DEPOSIT_IMAGE) {
             getDepositImageResponse(response);

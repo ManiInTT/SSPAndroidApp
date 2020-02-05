@@ -6,13 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +16,21 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ssp.tt.com.ssp.GlideApp;
 import ssp.tt.com.ssp.R;
 import ssp.tt.com.ssp.adapter.DashboardAdapter;
 import ssp.tt.com.ssp.support.PreferenceConnector;
@@ -65,6 +69,7 @@ public class Dashboard extends BaseActivity
     ServiceConnector serviceConnector;
     WebServiceUtil apiRequest;
     ProgressDialog dialog;
+    TextView tvUsrName;
 
     public int API_TYPE = 1;
     public final int API_WALLET_BALANCE = 1;
@@ -74,6 +79,7 @@ public class Dashboard extends BaseActivity
     float totalAmount = 0;
     TextView textCartItemCount;
     String yourAccountBalance = "";
+    AppCompatImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +101,13 @@ public class Dashboard extends BaseActivity
     protected void onResume() {
         super.onResume();
         serviceRequest();
+
+        String path = PreferenceConnector.readString(this, PreferenceConnector.IMAGE_PATH, "");
+        if (!path.equals("")) GlideApp.with(this).load(path).into(imageView);
+        String userEmail = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_EMAIL, "");
+        String userName = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_NAME, "");
+        tvUsrName.setText(userName);
+        login_email.setText(userEmail);
     }
 
     /************************************************************************************
@@ -122,15 +135,14 @@ public class Dashboard extends BaseActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
         login_email = (TextView) header.findViewById(R.id.login_email);
-        TextView tvUsrName = (TextView) header.findViewById(R.id.user_name);
-
+        tvUsrName = (TextView) header.findViewById(R.id.user_name);
+        imageView =  header.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
-        String userEmail = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_EMAIL, "");
-        String userName = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_NAME, "");
-        tvUsrName.setText(userName);
-        login_email.setText(userEmail);
+
 
     }
+
+
 
     /************************************************************************************
      * Class      : Dashboard
@@ -146,13 +158,17 @@ public class Dashboard extends BaseActivity
                 if (pos == 0) {
                     startActivity(new Intent(Dashboard.this, Ewallet.class));
                 } else if (pos == 1) {
-                    startActivity(new Intent(Dashboard.this, ResultActivity.class));
+                    Intent intent = new Intent(Dashboard.this, MyResult.class);
+                    startActivity(intent);
+                    //startActivity(new Intent(Dashboard.this, ResultActivity.class));
                 } else if (pos == 2) {
                     startActivity(new Intent(Dashboard.this, TicketType.class));
                 } else if (pos == 3) {
                     new CheckRegisterWithBank().execute();
                 } else if (pos == 4) {
-                    startActivity(new Intent(Dashboard.this, MyBlock.class));
+                    Intent intent = new Intent(Dashboard.this, MyBlockResult.class);
+                    startActivity(intent);
+                    //startActivity(new Intent(Dashboard.this, MyBlock.class));
                 } else if (pos == 5) {
                     startActivity(new Intent(Dashboard.this, MyPurchases.class));
                 } else if (pos == 6) {
@@ -181,27 +197,25 @@ public class Dashboard extends BaseActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.my_wallet) {
-            startActivity(new Intent(Dashboard.this, Ewallet.class));
-        } else if (id == R.id.nav_result) {
-            startActivity(new Intent(Dashboard.this, ResultActivity.class));
-        } else if (id == R.id.buy_ticket) {
-            startActivity(new Intent(Dashboard.this, TicketType.class));
-        } else if (id == R.id.nav_with_drawal) {
-            new CheckRegisterWithBank().execute();
-        } else if (id == R.id.profile) {
+        if (id == R.id.nav_profile) {
             Intent intent = new Intent(Dashboard.this, Profile.class);
             intent.putExtra("pageRequestFlag", "UPDATE");
             startActivity(intent);
+        } else if (id == R.id.nav_change_password) {
+            Intent intent = new Intent(this, PINRequest.class);
+            intent.putExtra("pageRequestFlag", "CHANGE_PASSWORD");
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_terms_conditions) {
+
+        } else if (id == R.id.nav_support) {
+            Intent intent = new Intent(Dashboard.this, Support.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_contactus) {
+
         } else if (id == R.id.logout) {
             Intent intent = new Intent(Dashboard.this, Login.class);
             intent.putExtra("pageRequestFlag", "LOGIN");
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.change_password) {
-            Intent intent = new Intent(this, PINRequest.class);
-            intent.putExtra("pageRequestFlag", "CHANGE_PASSWORD");
             startActivity(intent);
             finish();
         }

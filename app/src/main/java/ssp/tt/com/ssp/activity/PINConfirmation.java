@@ -7,18 +7,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,15 +75,10 @@ public class PINConfirmation extends BaseActivity implements View.OnClickListene
         String userId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
         userImeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
         Bundle extras = getIntent().getExtras();
-        String userPin = extras.getString("pin");
         pageRequestFlag = extras.getString("pageRequestFlag");
-
         userEmail = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_EMAIL, "");
-
-
         pin.setText(userPin);
-        Log.i("user id", userId);
-        Log.i("imeiNumber", userImeiNumber);
+
     }
 
     /************************************************************************************
@@ -149,7 +142,7 @@ public class PINConfirmation extends BaseActivity implements View.OnClickListene
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
 
             snackbar.show();

@@ -3,7 +3,7 @@
 // import android.content.Intent;
 // import android.os.Bundle;
 // import android.os.Handler;
-// import android.support.v7.app.AppCompatActivity;
+// import androidx.appcompat.app.AppCompatActivity;
 // import android.view.View;
 // import android.widget.ImageView;
 // import android.widget.ProgressBar;
@@ -75,7 +75,9 @@ package ssp.tt.com.ssp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ssp.tt.com.ssp.R;
 import ssp.tt.com.ssp.support.PreferenceConnector;

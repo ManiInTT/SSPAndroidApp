@@ -1,28 +1,22 @@
 package ssp.tt.com.ssp.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.rey.material.app.DialogFragment;
-import com.rey.material.app.SimpleDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -173,7 +167,7 @@ public class LoginPassword extends BaseActivity implements View.OnClickListener 
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
 
             snackbar.show();

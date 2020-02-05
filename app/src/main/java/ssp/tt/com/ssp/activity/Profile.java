@@ -6,12 +6,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,19 +17,31 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import ssp.tt.com.ssp.GlideApp;
 import ssp.tt.com.ssp.R;
 import ssp.tt.com.ssp.support.PreferenceConnector;
 import ssp.tt.com.ssp.utils.ProgressUtil;
@@ -48,6 +57,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
     TextInputLayout firstNameLayout, lastNameLayout, doorLayout, pinCodeLayout, streetLayout, mobileLayout, dateOfBirthLayout, emailLayout, stateLayout, cityLayout, countryLayout;
     EditText dateOfBirth, firstName, lastName, doorNo, street, mobile, pincode, email, country, city, state;
     Button btn_delete;
+    ImageView ivProfile;
     private int mYear, mMonth, mDay;
     String userImeiNumber;
     String genderFlag = "1", pageRequestFlag;
@@ -60,11 +70,14 @@ public class Profile extends BaseActivity implements View.OnClickListener {
     RadioGroup gender;
     private String API_TYPE = "";
     private String API_RESULT = "API_MYRESULT";
+    File imageFile = null;
+    public final static int IMAGE_REQUEST = 201;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ButterKnife.bind(this);
         registerBaseActivityReceiver();
         getWidgetConfig();
         serviceRequest("1");
@@ -83,6 +96,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
         serviceConnector.registerCallback(this);
         findViewById(R.id.et_dob).setOnClickListener(this);
         findViewById(R.id.btn_update).setOnClickListener(this);
+        ivProfile = findViewById(R.id.ivProfile);
         dateOfBirth = (EditText) findViewById(R.id.et_dob);
         firstName = (EditText) findViewById(R.id.et_first_name);
         lastName = (EditText) findViewById(R.id.et_last_name);
@@ -107,10 +121,8 @@ public class Profile extends BaseActivity implements View.OnClickListener {
         countryLayout = (TextInputLayout) findViewById(R.id.tl_country);
         stateLayout = (TextInputLayout) findViewById(R.id.tl_state);
         cityLayout = (TextInputLayout) findViewById(R.id.tl_city);
-        TextView tvBank = (TextView) findViewById(R.id.et_bank);
-        TextView ivBank = (TextView) findViewById(R.id.iv_bank);
+        Button tvBank = (Button) findViewById(R.id.et_bank);
         tvBank.setOnClickListener(this);
-        ivBank.setOnClickListener(this);
         userImeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.title_activity_profile));
@@ -199,12 +211,35 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                             });
                     snackbar.setActionTextColor(Color.RED);
                     View sbView = snackbar.getView();
-                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
                     snackbar.show();
                 }
             }
         });
+
+
+        String path = PreferenceConnector.readString(this, PreferenceConnector.IMAGE_PATH, "");
+        if (!path.equals("")) GlideApp.with(this).load(path).into(ivProfile);
+    }
+
+    @OnClick(R.id.ivProfile)
+    public void addProfileImage() {
+        pickImage(IMAGE_REQUEST, CropImageView.CropShape.RECTANGLE, 4, 4);
+
+    }
+
+    @Override
+    public void onImageChosen(int requestCode, Uri uri) {
+        super.onImageChosen(requestCode, uri);
+        if (IMAGE_REQUEST == requestCode) {
+            File file = new File(uri.getPath());
+            GlideApp.with(this)
+                    .load(file)
+                    .into(ivProfile);
+            this.imageFile = file;
+            new UploadProfile().execute();
+        }
     }
 
 
@@ -271,13 +306,6 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                 intent.putExtra(UpdateAccount.INTENT_AMOUNT, "");
                 startActivity(intent);
                 break;
-            case R.id.iv_bank:
-                intent = new Intent(this, UpdateAccount.class);
-                intent.putExtra(UpdateAccount.INTENT_TITLE, "PROFILE");
-                intent.putExtra(UpdateAccount.INTENT_AMOUNT, "");
-                startActivity(intent);
-                break;
-
         }
     }
 
@@ -417,7 +445,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
             group.setBackgroundColor(ContextCompat.getColor(Profile.this, R.color.colorPrimary));
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
             snackbar.show();
         }
@@ -629,7 +657,6 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                     }
                 } else {
                     serviceRequestFlag = 3;
-
                 }
             } else if (addressFlag == 1) {
                 String data = mJSONObject.getString(userProfileRequest.data);
@@ -658,6 +685,36 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                     String description = jsonObjectDesc.getString(webServiceUtil.description);
                     Util.warningAlertDialog(this, title, description, 0);
                 }
+            } else if (addressFlag == 6) {
+                if (mCode == userProfileRequest.codeSuccess) {
+                    WebServiceUtil webServiceUtil = new WebServiceUtil();
+                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);
+                    String description = jsonObjectDesc.getString(webServiceUtil.description);
+                    String data = mJSONObject.getString(webServiceUtil.data);
+                    new SaveProfilePhoto().execute(data);
+                } else {
+                    dialog.dismiss();
+                    WebServiceUtil webServiceUtil = new WebServiceUtil();
+                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);
+                    String title = jsonObjectDesc.getString(webServiceUtil.title);
+                    String description = jsonObjectDesc.getString(webServiceUtil.description);
+                    Util.warningAlertDialog(this, title, description, 0);
+                }
+            } else if (addressFlag == 7) {
+                if (mCode == userProfileRequest.codeSuccess) {
+                    dialog.dismiss();
+                    WebServiceUtil webServiceUtil = new WebServiceUtil();
+                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);
+                    String description = jsonObjectDesc.getString(webServiceUtil.description);
+                    Util.successAlertDialog(this, getResources().getString(R.string.success), description, 0);
+                } else {
+                    dialog.dismiss();
+                    WebServiceUtil webServiceUtil = new WebServiceUtil();
+                    JSONObject jsonObjectDesc = mJSONObject.getJSONObject(webServiceUtil.desc);
+                    String title = jsonObjectDesc.getString(webServiceUtil.title);
+                    String description = jsonObjectDesc.getString(webServiceUtil.description);
+                    Util.warningAlertDialog(this, title, description, 0);
+                }
             }
         } catch (JSONException mException) {
             dialog.dismiss();
@@ -674,7 +731,6 @@ public class Profile extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0 && resultCode == 1) {
@@ -694,6 +750,7 @@ public class Profile extends BaseActivity implements View.OnClickListener {
             city.setText(data.getStringExtra("name").toString());
             cityId = data.getStringExtra("id").toString();
         }
+
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -708,8 +765,6 @@ public class Profile extends BaseActivity implements View.OnClickListener {
 
         protected Void doInBackground(String... params) {
             try {
-
-                String userId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
                 serviceConnector.getStateDetails(countryId, stateId, getApplicationContext());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -734,6 +789,48 @@ public class Profile extends BaseActivity implements View.OnClickListener {
                 serviceConnector.deleteCustomers(getApplicationContext(), userId, imeiNumber);
             } catch (Exception e) {
             }
+            return null;
+        }
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    private class UploadProfile extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            addressFlag = 6;
+            serviceRequestFlag = 6;
+            dialog = ProgressUtil.showDialog(Profile.this, getString(R.string.loading_message));
+
+        }
+
+        protected Void doInBackground(String... params) {
+            try {
+                serviceConnector.profileImage(getApplicationContext(), imageFile);
+            } catch (Exception e) {
+            }
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class SaveProfilePhoto extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            addressFlag = 7;
+            serviceRequestFlag = 7;
+        }
+
+        protected Void doInBackground(String... params) {
+            try {
+                String userId = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_ID, "");
+                String imeiNumber = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.IMEI_NUMBER, "");
+                serviceConnector.saveProfileImage(getApplicationContext(), userId, imeiNumber, params[0]);
+            } catch (Exception e) {
+            }
+
             return null;
         }
     }

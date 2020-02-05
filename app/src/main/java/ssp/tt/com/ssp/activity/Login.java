@@ -13,20 +13,24 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,8 +39,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ssp.tt.com.ssp.R;
+import ssp.tt.com.ssp.sheet.APIConfigureFragment;
 import ssp.tt.com.ssp.support.PreferenceConnector;
 import ssp.tt.com.ssp.utils.ProgressUtil;
+import ssp.tt.com.ssp.utils.SimpleThreeFingerDoubleTapDetector;
 import ssp.tt.com.ssp.utils.Util;
 import ssp.tt.com.ssp.webservice.ServiceConnector;
 import ssp.tt.com.ssp.webservice.WebServiceUtil;
@@ -70,6 +76,8 @@ public class Login extends BaseActivity implements View.OnClickListener {
     private String API_LOGIN = "API_LOGIN";
     private String API_UPDATE_IMEI = "API_UPDATE_IMEI";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +90,8 @@ public class Login extends BaseActivity implements View.OnClickListener {
         } else {
             isPermissionPhoneState = true;
         }
+        // Detect touched area
+
     }
 
     private void getIMEINumber() {
@@ -150,6 +160,13 @@ public class Login extends BaseActivity implements View.OnClickListener {
         String userEmail = PreferenceConnector.readString(getApplicationContext(), PreferenceConnector.USER_EMAIL, "");
         linearLayout = findViewById(R.id.linearLayout);
         userName.setText(userEmail);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
     }
 
     /************************************************************************************
@@ -256,7 +273,7 @@ public class Login extends BaseActivity implements View.OnClickListener {
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
 
             snackbar.show();
@@ -447,4 +464,29 @@ public class Login extends BaseActivity implements View.OnClickListener {
                 .create()
                 .show();
     }
+
+
+    SimpleThreeFingerDoubleTapDetector multiTouchListener = new SimpleThreeFingerDoubleTapDetector() {
+        @Override
+        public void onThreeFingerDoubleTap() {
+            APIConfigureFragment fragment = new APIConfigureFragment();
+            fragment.show(getSupportFragmentManager(), fragment.getTag());
+        }
+    };
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        multiTouchListener.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent me){
+        multiTouchListener.onTouchEvent(me);
+        return super.dispatchTouchEvent(me);
+    }
+
+
+
 }

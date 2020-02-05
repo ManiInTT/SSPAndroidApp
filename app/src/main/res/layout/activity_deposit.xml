@@ -58,7 +58,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
-                        android:background="#469394"
+                        android:background="#FF8911"
                         android:gravity="center"
                         android:text="@string/icon_down_arrow"
                         android:textColor="@android:color/white"
@@ -87,7 +87,7 @@
                         android:button="@drawable/radio_btn_selector"
                         android:checked="true"
                         android:text="Deposit"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/tv_netbanking"
@@ -97,7 +97,7 @@
                         android:background="@null"
                         android:button="@drawable/radio_btn_selector"
                         android:text="Netbanking / Transfer"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
                 </RadioGroup>
 
                 <TextView
@@ -116,33 +116,37 @@
 
                     <RadioButton
                         android:id="@+id/tv_cash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:background="@null"
                         android:button="@drawable/radio_btn_selector"
                         android:checked="true"
+                        android:layout_weight="1"
+                        android:maxLines="1"
                         android:text="Cash"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/tv_cheque"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:background="@null"
+                        android:maxLines="1"
+                        android:layout_weight="1"
                         android:button="@drawable/radio_btn_selector"
                         android:text="Cheque"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/tv_draft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:background="@null"
+                        android:layout_weight="1"
+                        android:maxLines="1"
                         android:button="@drawable/radio_btn_selector"
-                        android:text="Demand draft"
-                        android:textSize="15sp" />
+                        android:text="DD"
+                        android:textSize="14sp" />
                 </RadioGroup>
 
 
@@ -321,7 +325,7 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_alignParentRight="true"
-                                    android:background="#469394"
+                                    android:background="#FF8911"
                                     android:gravity="center"
                                     android:text="@string/icon_down_arrow"
                                     android:textColor="@android:color/white"
@@ -358,7 +362,7 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_alignParentRight="true"
-                                    android:background="#469394"
+                                    android:background="#FF8911"
                                     android:gravity="center"
                                     android:text="@string/icon_down_arrow"
                                     android:textColor="@android:color/white"

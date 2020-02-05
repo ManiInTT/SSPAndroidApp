@@ -10,10 +10,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -162,24 +162,10 @@ public class Ewallet extends BaseActivity {
         final TextView btnCancel = dialog.findViewById(R.id.cancel_btn);
         final TextView btnOk = dialog.findViewById(R.id.ok_btn);
         final EditText etFromDate = dialog.findViewById(R.id.et_from_date);
-        final TextView ivFromDate = dialog.findViewById(R.id.iv_from_date);
         final EditText etToDate = dialog.findViewById(R.id.et_to_date);
-        final TextView ivToDate = dialog.findViewById(R.id.iv_to_date);
         fromDate = null;
         toDate = null;
-        etToDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivToDate.performClick();
-            }
-        });
         etFromDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivFromDate.performClick();
-            }
-        });
-        ivFromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(Ewallet.this, R.style.datepickerCustom, new DatePickerDialog.OnDateSetListener() {
@@ -209,8 +195,7 @@ public class Ewallet extends BaseActivity {
                 datePickerDialog.show();
             }
         });
-
-        ivToDate.setOnClickListener(new View.OnClickListener() {
+        etToDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(Ewallet.this, R.style.datepickerCustom, new DatePickerDialog.OnDateSetListener() {
@@ -290,7 +275,9 @@ public class Ewallet extends BaseActivity {
 
     @OnClick(R.id.tv_more_transaction)
     public void moreTransaction(View view) {
-        startActivity(new Intent(Ewallet.this, TransactionHistory.class));
+          Intent intent = new Intent(this, TransactionHistory.class);
+        intent.putExtra(TransactionHistory.OPEN_TAB, 1);
+        startActivity(intent);
     }
 
     @NonNull
@@ -354,7 +341,7 @@ public class Ewallet extends BaseActivity {
             group.setBackgroundColor(ContextCompat.getColor(Ewallet.this, R.color.colorPrimary));
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
             snackbar.show();
         }

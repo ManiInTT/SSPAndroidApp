@@ -35,7 +35,7 @@
                 android:textSize="@dimen/register_user_icon" />
 
             <!--  email  -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_email_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,10 +52,10 @@
 
                     <requestFocus />
                 </EditText>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!--  mobile Number -->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tl_mobile_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:hint="@string/mobile_user"
                     android:inputType="number"
                     android:maxLength="10" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <Button

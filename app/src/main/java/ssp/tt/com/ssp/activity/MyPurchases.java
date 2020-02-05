@@ -7,41 +7,34 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.whiteelephant.monthpicker.MonthPickerDialog;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ssp.tt.com.ssp.R;
-import ssp.tt.com.ssp.adapter.MyBlockResultNewAdapter;
 import ssp.tt.com.ssp.adapter.MyPurchasesAdapter;
 import ssp.tt.com.ssp.adapter.RecyclerTouchListener;
-import ssp.tt.com.ssp.model.MyBlockResultDao;
 import ssp.tt.com.ssp.model.MyPurchasesModel;
 import ssp.tt.com.ssp.support.PreferenceConnector;
-import ssp.tt.com.ssp.utils.ProgressUtil;
 import ssp.tt.com.ssp.utils.Util;
 import ssp.tt.com.ssp.webservice.ServiceConnector;
 import ssp.tt.com.ssp.webservice.WebServiceUtil;
@@ -93,7 +86,6 @@ public class MyPurchases extends BaseActivity {
         new MyPurchasesAPI().execute();
         addHeaders();
         loadTable();
-
     }
 
     private void loadTable() {
@@ -183,7 +175,7 @@ public class MyPurchases extends BaseActivity {
                     });
             snackbar.setActionTextColor(Color.RED);
             View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }

@@ -65,6 +65,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/alert_btn_bg"
                 android:text="Yes"
+                android:textColor="@color/white"
                 android:textSize="12sp" />
 
             <TextView
@@ -77,6 +78,7 @@
                 android:layout_toLeftOf="@+id/yes_btn"
                 android:background="@drawable/alert_btn_bg"
                 android:text="No"
+                android:textColor="@color/white"
                 android:textSize="12sp" />
 
         </RelativeLayout>

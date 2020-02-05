@@ -1,14 +1,19 @@
 package ssp.tt.com.ssp.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.Nullable;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.appcompat.widget.Toolbar;
+
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -37,6 +43,7 @@ import ssp.tt.com.ssp.utils.ProgressUtil;
 import ssp.tt.com.ssp.utils.Util;
 import ssp.tt.com.ssp.webservice.ServiceConnector;
 import ssp.tt.com.ssp.webservice.WebServiceUtil;
+
 
 public class UpdateAccount extends BaseActivity {
 
@@ -162,12 +169,16 @@ public class UpdateAccount extends BaseActivity {
 
     @OnClick(R.id.et_bank)
     public void setBank(View view) {
-        spinnerBank.performClick();
+        Intent i = new Intent(UpdateAccount.this, BankListSelection.class);
+        i.putExtra(BankListSelection.ARG_BANK, arrayListBank);
+        startActivityForResult(i, 2);
     }
 
     @OnClick(R.id.iv_bank)
     public void setIvBank(View view) {
-        spinnerBank.performClick();
+        Intent i = new Intent(UpdateAccount.this, BankListSelection.class);
+        i.putExtra(BankListSelection.ARG_BANK, arrayListBank);
+        startActivityForResult(i, 2);
     }
 
 
@@ -197,20 +208,6 @@ public class UpdateAccount extends BaseActivity {
         unRegisterBaseActivityReceiver();
     }
 
-    private void setSpinnerListener() {
-        spinnerBank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (arrayListBank.size() > 0) {
-                    etBank.setText(arrayListBank.get(position).getBankName());
-                    bankId = arrayListBank.get(position).getBankId();
-                }
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     @Override
     public void callbackReturn(String response) {
@@ -243,7 +240,6 @@ public class UpdateAccount extends BaseActivity {
                 BankAdapter bankAdapter = new BankAdapter(UpdateAccount.this,
                         R.layout.item_bank, R.id.title, arrayListBank);
                 spinnerBank.setAdapter(bankAdapter);
-                setSpinnerListener();
                 new GettingAccountDetails().execute();
             } else {
                 dialog.dismiss();
@@ -419,6 +415,18 @@ public class UpdateAccount extends BaseActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 2 && resultCode == 1) {
+            etBank.setText(data.getStringExtra("name").toString());
+            bankId = data.getStringExtra("id").toString();
+        }
+
     }
 
 }

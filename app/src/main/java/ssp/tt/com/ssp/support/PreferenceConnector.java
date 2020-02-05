@@ -18,6 +18,8 @@ public class PreferenceConnector {
     public static final String USER_NAME = "userName";
     public static final String USER_TOTAL_AMOUNT= "userTotalAmount";
     public static final String USER_CURRENT_AMOUNT= "userCurrentAmount";
+    public static final String IMAGE_PATH = "imagePath";
+    public static final String APP_URL = "appUrl";
     /**
      * @param context
      * @param key

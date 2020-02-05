@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -46,6 +46,7 @@ import ssp.tt.com.ssp.webservice.WebServiceUtil;
  * @author
  */
 public class CountrySelection extends BaseActivity {
+
     EditText countryTxt;
     ImageView deleteBtn;
     RelativeLayout searchLayout;
@@ -111,7 +112,7 @@ public class CountrySelection extends BaseActivity {
             group.setBackgroundColor(ContextCompat.getColor(CountrySelection.this, R.color.colorPrimary));
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.RED);
             snackbar.show();
         }

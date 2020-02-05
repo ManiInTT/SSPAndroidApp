@@ -228,6 +228,12 @@ public interface RequestApi {
     Call<ResponseBody> getUserBlocks(@Field("user_id") String user_id,
                                         @Field("user_imei_number") String user_imei_number);
 
+    @FormUrlEncoded
+    @POST("customers/saveuserphoto")
+    Call<ResponseBody> saveProfileImage(@Field("user_id") String user_id,
+                                     @Field("user_imei_number") String user_imei_number,
+                                     @Field("user_photo_path") String user_photo_path);
+
     @GET("customertrans/getbank")
     Call<ResponseBody> getBankList();
 
@@ -257,6 +263,10 @@ public interface RequestApi {
     @Multipart
     @POST("customertrans/uploadtransimage")
     Call<ResponseBody> depositImage(@Part MultipartBody.Part depositPhoto);
+
+    @Multipart
+    @POST("customers/uploaduserphoto")
+    Call<ResponseBody> profileImage(@Part MultipartBody.Part depositPhoto);
 
     @FormUrlEncoded
     @POST("customertrans/removeuploadimage")
